@@ -1,64 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-class LoginForm extends React.Component{
-    render(){
-      return(
-        <div id="loginform">
-          <FormHeader title="Login" />
-          <Form />
-          <OtherMethods />
-        </div>
-      )
+
+async function loginUser(credentials) {
+    return fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(data => data.json())
+   }
+   
+
+export default function LoginForm ({setToken}) {
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
+    
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const token = await loginUser({
+          username,
+          password
+        });
+        setToken(token);
     }
-  }
-  
-  const FormHeader = props => (
-      <h2 id="headerTitle">{props.title}</h2>
-  );
-  
-  
-  const Form = props => (
-     <div>
-       <FormInput description="Username" placeholder="Enter your username" type="text" />
-       <FormInput description="Password" placeholder="Enter your password" type="password"/>
-       <FormButton title="Log in"/>
-     </div>
-  );
-  
-  const FormButton = props => (
-    <div id="button" class="row">
-      <button>{props.title}</button>
-    </div>
-  );
-  
-  const FormInput = props => (
-    <div class="row">
-      <label>{props.description}</label>
-      <input type={props.type} placeholder={props.placeholder}/>
-    </div>  
-  );
-  
-  const OtherMethods = props => (
-    <div id="alternativeLogin">
-      <label>Or sign in with:</label>
-      <div id="iconGroup">
-        <Facebook />
-        <Twitter />
-        <Google />
-      </div>
-    </div>
-  );
-  
-  const Facebook = props => (
-    <a href="#" id="facebookIcon"></a>
-  );
-  
-  const Twitter = props => (
-    <a href="#" id="twitterIcon"></a>
-  );
-  
-  const Google = props => (
-    <a href="#" id="googleIcon"></a>
-  );
 
-  export default LoginForm;
+    return(
+    <div id="loginform">
+        <h2 id="headerTitle">Login</h2>
+        <form onSubmit={handleSubmit}>
+        <div>
+             <div class="row">
+                 <label>Username</label>
+                <input type="text" placeholder="Enter your username" onChange={e => setUserName(e.target.value)} />
+            </div> 
+            <div class="row">
+                 <label>Password</label>
+                <input type="password" placeholder="Enter your password" onChange={e => setPassword(e.target.value)} />
+            </div>
+            <div id="button" class="row">
+                <button>Log In</button>
+            </div> 
+        </div>
+        <div id="alternativeLogin">
+            <label>Or sign in with:</label>
+            <div id="iconGroup">
+            </div>
+        </div>
+        </form>
+    </div>
+    )
+}
+  
+
+LoginForm.propTypes = {
+    setToken: PropTypes.func.isRequired
+};
