@@ -3,25 +3,31 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import LoginForm from './components/LoginForm';
 import Dashboard from './components/Dashboard';
-import Report from './components/Report';
+import Home from './components/Home';
+
+function setToken(userToken) {
+  sessionStorage.setItem('token', JSON.stringify(userToken));
+}
+
+export function getToken() {
+  const tokenString = sessionStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token
+}
 
 function App() {
-  const [token, setToken] = useState();
-
-  if (!token) {
-    return <LoginForm setToken={setToken} />
-  }
+//  const token = getToken();
+//  if (!token) {
+//    return <LoginForm setToken={setToken} />
+//  }
 
   return (
     <div>
     <BrowserRouter>
         <Routes>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/reports">
-            <Report />
-          </Route>
+          <Route index element = {<Home />} />
+          <Route path="/login" element = {<LoginForm setToken={setToken} />} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
     </BrowserRouter>
     </div>

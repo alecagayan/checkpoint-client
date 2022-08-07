@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import PropTypes from 'prop-types';
 
 
 async function loginUser(credentials) {
-    return fetch('http://localhost:8080/login', {
+    return fetch('http://localhost:8080/rbapi/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -17,6 +18,7 @@ async function loginUser(credentials) {
 export default function LoginForm ({setToken}) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const navigate = useNavigate();
     
     const handleSubmit = async e => {
         e.preventDefault();
@@ -24,7 +26,12 @@ export default function LoginForm ({setToken}) {
           username,
           password
         });
-        setToken(token);
+        console.log('we received token: ', token);
+        console.log('we received token.token: ', token.token);
+        if (token.token) {
+            setToken(token);
+            navigate("/");
+        }
     }
 
     return(
