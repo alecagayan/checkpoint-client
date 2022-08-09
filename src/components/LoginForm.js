@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 async function loginUser(credentials) {
-    return fetch('http://localhost:8080/rbapi/login', {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -39,15 +39,15 @@ export default function LoginForm ({setToken}) {
         <h2 id="headerTitle">Login</h2>
         <form onSubmit={handleSubmit}>
         <div>
-             <div class="row">
+             <div className="row">
                  <label>Username</label>
                 <input type="text" placeholder="Enter your username" onChange={e => setUserName(e.target.value)} />
             </div> 
-            <div class="row">
+            <div className="row">
                  <label>Password</label>
                 <input type="password" placeholder="Enter your password" onChange={e => setPassword(e.target.value)} />
             </div>
-            <div id="button" class="row">
+            <div id="button" className="row">
                 <button>Log In</button>
             </div> 
         </div>
