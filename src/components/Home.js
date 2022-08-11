@@ -66,7 +66,7 @@ class Home extends React.Component {
     return(
         <React.Fragment>
             <h2>Home</h2>
-            <p>Welcome to the Checkpoint!</p>
+            <p>Welcome to Checkpoint!</p>
             <UserTable data={this.state.userData} />
             <AddUser />
             <br/>

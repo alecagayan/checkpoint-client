@@ -1,23 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
 
-export function handleMeetingAttendance(meetingId) {
-
-  window.open(`/checkin/${meetingId}`);
-
-}
-
-export function handleMeetingReport(meetingId) {
-
-  window.open(`/report/${meetingId}`);
-
-}
-
-export function handleMeetingClose(meetingId) {
-  console.log('need to close: ' + meetingId);
-}
-
-export default function MeetingTable({ data }) {
+export default function AttendeeTable({ data }) {
 
     // Create a state
     const [filterInput, setFilterInput] = useState("");
@@ -25,7 +9,7 @@ export default function MeetingTable({ data }) {
     // Update the state when input changes
     const handleFilterChange = e => {
       const value = e.target.value || undefined;
-      setFilter("opentime", value);
+      setFilter("name", value);
       setFilterInput(value);  
     };
 
@@ -33,45 +17,25 @@ export default function MeetingTable({ data }) {
         () => [
         {
             // first group - TV Show
-            Header: "Meetings",
+            Header: "Attendees",
             // First group columns
             columns: [
             {
+                Header: "Name",
+                accessor: "name"
+            },
+            {
                 Header: "ID",
-                accessor: "id"
+                accessor: "login"
             },
             {
-                Header: "Location",
-                accessor: "location"
+                Header: "Checkin Time",
+                accessor: "checkintime"
             },
             {
-                Header: "Open Time",
-                accessor: "opentime"
-            },
-            {
-                Header: "Close Time",
-                accessor: "closetime"
-            },
-            {
-                Header: "Attendees",
-                accessor: "attendees"
-            },
-            {
-                Header: "Actions",
-                Cell: ({ cell }) => (
-                  <div>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingAttendance(cell.row.values.id)} hidden={ cell.row.values.closetime != ""}>
-                      Record Attendance
-                    </button>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingClose(cell.row.values.id)} hidden={ cell.row.values.closetime != ""}>
-                      End Meeting
-                    </button>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingReport(cell.row.values.id)}>
-                      View Report
-                    </button>
-                  </div>
-                )
-            }            
+                Header: "Checkout Time",
+                accessor: "checkouttime"
+            },            
             ]
         }],
         []
@@ -112,7 +76,7 @@ export default function MeetingTable({ data }) {
         <input
           value={filterInput}
           onChange={handleFilterChange}
-          placeholder={"Search by date"}
+          placeholder={"Search by name"}
         />
         <table {...getTableProps()}>
           <thead>

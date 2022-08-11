@@ -35,8 +35,8 @@ export default function LoginForm ({setToken}) {
     }
 
     return(
-    <div id="loginform">
-        <h2 id="headerTitle">Login</h2>
+    <div id="form">
+        <h2 id="headerTitle">Admin Login</h2>
         <form onSubmit={handleSubmit}>
         <div>
              <div className="row">
@@ -50,11 +50,7 @@ export default function LoginForm ({setToken}) {
             <div id="button" className="row">
                 <button>Log In</button>
             </div> 
-        </div>
-        <div id="alternativeLogin">
-            <label>Or sign in with:</label>
-            <div id="iconGroup">
-            </div>
+            <a href="/signup" className='signupbutton' >Don't have an account? Register</a>
         </div>
         </form>
     </div>

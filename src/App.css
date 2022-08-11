@@ -44,6 +44,9 @@ table td:last-child {
 table tr:nth-child(even) {
   background-color: #fafafa;
 }
+table tr:nth-child(odd) {
+  background-color: #ffffff;
+}
 
 table th::before {
   position: absolute;

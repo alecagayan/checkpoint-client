@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
+import CheckinForm from './components/CheckinForm';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
+import MeetingReport from './components/MeetingReport';
 
 
 function setToken(userToken) {
@@ -38,6 +41,19 @@ export default function App() {
           <Route path="/login" element = {
             <LoginForm setToken={setToken} />
             } />
+          <Route path="/signup" element = {
+            <SignupForm />
+            } />
+          <Route path="/checkin/:meetingId" element = {
+            <RequireAuth>
+              <CheckinForm />
+            </RequireAuth>
+          } />
+          <Route path="/report/:meetingId" element = {
+            <RequireAuth>
+              <MeetingReport />
+            </RequireAuth>
+          } />
           <Route path="/dashboard" element={
             <RequireAuth>
               <Dashboard/>
