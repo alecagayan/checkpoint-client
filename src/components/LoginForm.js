@@ -26,8 +26,6 @@ export default function LoginForm ({setToken}) {
           username,
           password
         });
-        console.log('we received token: ', token);
-        console.log('we received token.token: ', token.token);
         if (token.token) {
             setToken(token);
             navigate("/");

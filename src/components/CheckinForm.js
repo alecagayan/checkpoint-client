@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import Toast from './toast/Toast';
 import PropTypes from 'prop-types';
+import { getToken } from '../App';
 
 
 async function checkinUser(credentials) {
@@ -23,7 +24,7 @@ export default function CheckinForm({ setToken }) {
     const [toastList, setToastList] = useState([]);
     let toastProperties = null;
 
-    const storedToken = sessionStorage.getItem('token');
+    const storedToken = getToken();
     
     const handleSubmit = async e => {
         e.preventDefault();
@@ -38,15 +39,15 @@ export default function CheckinForm({ setToken }) {
             };
             setToastList([...toastList, toastProperties]);
             return;
-        }
+        } 
 
         const result = await checkinUser({
             login: studentId,
-            storedToken,
+            token: storedToken,
             meetingId
         });
         console.log('we received result: ', result);
-        if (result.result === "1") {
+        if (result.result === "1") {    
             setStudentId("");
             showToast('success');
         }

@@ -29,7 +29,9 @@ return (
 		</NavLink>
 		</NavMenu>
 		<NavBtn>
-		<NavBtnLink to='/logout'>Logout</NavBtnLink>
+		<NavBtnLink to='/login' onClick={() => { 
+            sessionStorage.removeItem('token');
+        }}>Logout</NavBtnLink>
 		</NavBtn>
 	</Nav>
 	</>
