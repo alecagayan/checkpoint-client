@@ -6,18 +6,8 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
   font-family: "work sans";
+  margin: 0;
 }
-
-/* body.home{
-  background: #FFFFFF;
-  background-blend-mode: color-burn;
-  background-size: cover;
-  background-repeat: no-repeat;
-  font-family: "work sans";
-  width: 100%;
-  height: 100%;
-  padding: 0;
-} */
 
 html{
   font-size: 100%;
@@ -40,6 +30,10 @@ html{
   padding: 2rem 0;
   margin: 0;
   font-size: 2rem;
+}
+
+.main {
+  margin: 12px;
 }
 
 .row{

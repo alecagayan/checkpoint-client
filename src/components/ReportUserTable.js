@@ -1,23 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
 
-export function handleMeetingAttendance(meetingId) {
-
-  window.open(`/checkin/${meetingId}`);
-
+function handleUserEdit(userId) {
+  console.log('need to edit: ' + userId);
 }
 
-export function handleMeetingReport(meetingId) {
 
-  window.open(`/meetingreport/${meetingId}`);
-
-}
-
-export function handleMeetingClose(meetingId) {
-  console.log('need to close: ' + meetingId);
-}
-
-export default function MeetingTable({ data }) {
+export default function ReportUserTable({ data }) {
 
     // Create a state
     const [filterInput, setFilterInput] = useState("");
@@ -25,49 +14,43 @@ export default function MeetingTable({ data }) {
     // Update the state when input changes
     const handleFilterChange = e => {
       const value = e.target.value || undefined;
-      setFilter("opentime", value);
+      setFilter("name", value);
       setFilterInput(value);  
     };
-
+    
     const columns = useMemo(
         () => [
         {
             // first group - TV Show
-            Header: "Meetings",
+            Header: "Users",
             // First group columns
             columns: [
             {
-                Header: "ID",
-                accessor: "id"
+                Header: "Name",
+                accessor: "name"
             },
             {
-                Header: "Location",
-                accessor: "location"
+                Header: "Login",
+                accessor: "login"
             },
             {
-                Header: "Open Time",
-                accessor: "opentime"
+                Header: "Email",
+                accessor: "email"
             },
             {
-                Header: "Close Time",
-                accessor: "closetime"
+              Header: "Attendance",
+              accessor: "attendee_count"
             },
             {
                 Header: "Actions",
                 Cell: ({ cell }) => (
                   <div>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingAttendance(cell.row.values.id)} hidden={ cell.row.values.closetime != ""}>
-                      Record Attendance
-                    </button>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingClose(cell.row.values.id)} hidden={ cell.row.values.closetime != ""}>
-                      End Meeting
-                    </button>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingReport(cell.row.values.id)}>
-                      View Report
+                    <button value={cell.row.values.login} onClick={ () => handleUserEdit(cell.row.values.login)}>
+                      Details
                     </button>
                   </div>
                 )
-            }            
+            }
             ]
         }],
         []
@@ -77,8 +60,8 @@ export default function MeetingTable({ data }) {
       getTableProps,
       getTableBodyProps,
       headerGroups,
-      prepareRow,
       setFilter,
+      prepareRow,
       page, // Instead of using 'rows', we'll use page,
       // which has only the rows for the active page
   
@@ -108,8 +91,11 @@ export default function MeetingTable({ data }) {
         <input
           value={filterInput}
           onChange={handleFilterChange}
-          placeholder={"Search by date"}
+          placeholder={"Search by name"}
         />
+        <div>
+
+        </div>
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (

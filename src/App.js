@@ -7,6 +7,10 @@ import CheckinForm from './components/CheckinForm';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import MeetingReport from './components/MeetingReport';
+import Report from './components/Report';
+import Users from './components/Users';
+import Meetings from './components/Meetings';
+import Navbar from './components/navbar/Navbar';
 
 
 function setToken(userToken) {
@@ -35,6 +39,7 @@ export default function App() {
         <Routes>
           <Route index element = { 
             <RequireAuth>
+              <Navbar />
               <Home/>
             </RequireAuth>
           } />
@@ -49,14 +54,34 @@ export default function App() {
               <CheckinForm />
             </RequireAuth>
           } />
-          <Route path="/report/:meetingId" element = {
+          <Route path="/meetingreport/:meetingId" element = {
             <RequireAuth>
+              <Navbar />
               <MeetingReport />
+            </RequireAuth>
+          } />
+          <Route path="/report" element={
+            <RequireAuth>
+              <Navbar />
+              <Report />
             </RequireAuth>
           } />
           <Route path="/dashboard" element={
             <RequireAuth>
-              <Dashboard/>
+              <Navbar />
+              <Dashboard />
+            </RequireAuth>
+          } />
+          <Route path="/users" element={
+            <RequireAuth>
+              <Navbar />
+              <Users />
+            </RequireAuth>
+          } />
+          <Route path="/meetings" element={
+            <RequireAuth>
+              <Navbar />
+              <Meetings />
             </RequireAuth>
           } />
         </Routes>
