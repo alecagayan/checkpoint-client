@@ -65,3 +65,40 @@ table th.sort-desc::before {
   border-top: 5px solid #22543d;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+}
+
+.grid-child {
+  border: 2px solid #f0f0f0;
+}  
+
+.flex-container {
+  display: flex;
+  padding: 30px;
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid #f0f0f0;
+}  
+
+.flex-child:first-child {
+  margin-right: 60px;
+} 
+
+.chart-container {
+  position: absolute;
+  width: 100%;
+}
+
+.chart {
+  float: left;
+  width: 500px;
+  background-color: #ffffff;
+  border: 2px solid #f0f0f0;
+  padding: 10px;
+  margin: 30px;
+} 

@@ -38,7 +38,7 @@ export default function ReportUserTable({ data }) {
                 accessor: "email"
             },
             {
-              Header: "Attendance",
+              Header: "Attendance, %",
               accessor: "attendee_count"
             },
             {

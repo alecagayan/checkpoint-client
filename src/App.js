@@ -6,6 +6,7 @@ import SignupForm from './components/SignupForm';
 import CheckinForm from './components/CheckinForm';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
+import Home2 from './components/Home2';
 import MeetingReport from './components/MeetingReport';
 import Report from './components/Report';
 import Users from './components/Users';
