@@ -1,17 +1,7 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { getToken } from "../App";
-
-async function addUser(userData) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/adduser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-      .then(data => data.json())
-   }
+import { addUser } from "../API";
 
 
 class AddUser extends React.Component {
@@ -43,10 +33,8 @@ class AddUser extends React.Component {
         username: this.state.userLogin, 
         token: getToken()       
       });
-      //console.log('we received response: ', result);
 
       this.setState({ showModal: false });
-
     }
       
     handleCloseModal () {

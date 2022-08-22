@@ -6,13 +6,11 @@ import SignupForm from './pages/SignupForm';
 import CheckinForm from './pages/CheckinForm';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
-import Home2 from './components/Home2';
 import MeetingDetails from './pages/MeetingDetails';
 import Report from './pages/Report';
 import Users from './pages/Users';
 import Meetings from './pages/Meetings';
 import Navbar from './components/navbar/Navbar';
-
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));

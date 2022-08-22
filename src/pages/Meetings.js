@@ -1,7 +1,7 @@
 import React from 'react';
 import MeetingTable from '../components/MeetingTable';
 import StartMeeting from '../components/StartMeeting';
-
+import { getMeetings } from '../API';
 
 class Meetings extends React.Component {
   constructor(props) {
@@ -14,8 +14,7 @@ class Meetings extends React.Component {
   }
 
   componentDidMount() {
-    fetch(process.env.REACT_APP_API_URL + "/rbapi/meetings")
-        .then(res => res.json())
+    getMeetings()
         .then(
             (result) => {
                 this.setState({

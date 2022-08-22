@@ -3,19 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Toast from '../components/toast/Toast';
 import PropTypes from 'prop-types';
 import { getToken } from '../App';
-
-
-async function checkinUser(credentials) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/checkin', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-        .then(data => data.json())
-}
-
+import { checkinUser } from '../API';
 
 export default function CheckinForm({ setToken }) {
     let { meetingId } = useParams();

@@ -6,10 +6,8 @@ import {
   Chart,
   Legend,
   LinearScale,
-//  LineController,
   BarController,
   LineElement,
-//  PointElement,
   Tooltip,
   BarElement,
   PointElement,
@@ -18,10 +16,9 @@ import {
 
 import { BarChart }  from '../components/charts/BarChart';
 import { LineChart } from '../components/charts/LineChart';
+import { getRecentMeetings, getTopAttendees } from '../API';
 
 Chart.register(
-//  LineController,
-//  PointElement,
   Legend,
   Tooltip,
   CategoryScale,
@@ -32,17 +29,6 @@ Chart.register(
   PointElement,
   LineController
 );
-
-function LogoutButton(props) {
-  const navigate = useNavigate();
-  return (
-    <button onClick={() => {
-      sessionStorage.removeItem('token');
-      navigate('/login');
-    }
-    }>Logout</button>
-  );
-}
 
 
 class Home extends React.Component {
@@ -66,12 +52,11 @@ class Home extends React.Component {
     end.setDate(end.getDate() + 1);
 
 
-    fetch(process.env.REACT_APP_API_URL + "/rbapi/recentmeetings?limit=10")
-      .then(res => res.json())
+    getRecentMeetings(10)
       .then(
         (result) => {
           const chartData = {
-            labels: result.map((entry) => entry.meeting_time),
+            labels: result.map((entry) => entry.meeting_time.substring(0, 10)),
             datasets: [
               {
                 label: 'Number of Attendees',
@@ -93,8 +78,7 @@ class Home extends React.Component {
         }
       )
 
-      fetch(process.env.REACT_APP_API_URL + "/rbapi/topattendees?limit=5&startDate="+ start.toISOString().substring(0, 10) + "&endDate=" + end.toISOString().substring(0, 10))
-      .then(res => res.json())
+    getTopAttendees(start, end, 5)
       .then(
         (result) => {
           const chartData = {
@@ -138,9 +122,6 @@ class Home extends React.Component {
           <p>Top attendees:</p>
         <BarChart chartData={this.state.attendeeData} />
         </div>
-        </div>
-        <div>
-        <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import UserTable from '../components/UserTable';
 import AddUser from '../components/AddUser';
+import { getUsers } from '../API';
 
 class Users extends React.Component {
   constructor(props) {
@@ -10,23 +11,17 @@ class Users extends React.Component {
       userData: [],
       IsApiError: false
     }
-    
   }
   
   componentDidMount() {
-    fetch(process.env.REACT_APP_API_URL + "/rbapi/users")
-        .then(res => res.json())
-        .then(
-            (result) => {
-                this.setState({
-                    userData: result
-                });
-            },
-            (error) => {
-                this.setState({ IsApiError: true });
-            }
-        )
-
+    getUsers()
+        .then(result => {
+            this.setState({
+                userData: result
+            });
+        } , error => {
+            this.setState({ IsApiError: true });
+        } )         
   }
 
   render () {

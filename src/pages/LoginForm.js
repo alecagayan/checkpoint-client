@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import PropTypes from 'prop-types';
-
-
-async function loginUser(credentials) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(data => data.json())
-   }
-   
+import { loginUser } from '../API';   
 
 export default function LoginForm ({setToken}) {
     const [username, setUserName] = useState();

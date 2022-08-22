@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import ReportUserTable from '../components/ReportUserTable';
-import MeetingTable from '../components/MeetingTable';
-import AddUser from '../components/AddUser';
-import StartMeeting from '../components/StartMeeting';
+import { getReportByDate } from '../API';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-
-function LogoutButton(props) {
-  const navigate = useNavigate();
-  return (
-      <button onClick={() => { 
-          sessionStorage.removeItem('token');
-          navigate('/login');
-      }
-  }>Logout</button>
-  );
-}
 
 
 class Report extends React.Component {
@@ -43,15 +29,13 @@ class Report extends React.Component {
     this.setState({endDate: end});
 
     if(start && end) {
-      fetch(process.env.REACT_APP_API_URL + "/rbapi/reportbydate?startDate=" + start.toISOString().substring(0, 10) + "&endDate=" + end.toISOString().substring(0, 10))
-        .then(res => res.json())
+      getReportByDate(start, end)
         .then(
             (result) => {
                 this.setState({
                     userData: result
                 });
-                console.log(result);
-            }, 
+              }, 
             (error) => {
                 this.setState({ IsApiError: true });
             }  
@@ -59,37 +43,6 @@ class Report extends React.Component {
     }
   }
 
-  
-//   componentDidMount() {
-//     // fetch(process.env.REACT_APP_API_URL + "/rbapi/users")
-//     //     .then(res => res.json())
-//     //     .then(
-//     //         (result) => {
-//     //             this.setState({
-//     //                 userData: result
-//     //             });
-//     //             //console.log(result);
-//     //         },
-//     //         (error) => {
-//     //             this.setState({ IsApiError: true });
-//     //         }
-//     //     )
-
-//     fetch(process.env.REACT_APP_API_URL + "/rbapi/meetings")
-//         .then(res => res.json())
-//         .then(
-//             (result) => {
-//                 this.setState({
-//                     meetingData: result
-//                 });
-//                 //console.log(result);
-//             }, 
-//             (error) => {
-//                 this.setState({ IsApiError: true });
-//             }  
-//         )
-
-//   }
 
   render () {
 

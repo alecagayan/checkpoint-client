@@ -102,3 +102,18 @@ table th.sort-desc::before {
   padding: 10px;
   margin: 30px;
 } 
+
+.nav-open {
+  display: block !important;
+  position: absolute;
+  width: 100%;
+  top: 75px;
+  background-color: #00aaff;
+  padding: 20px;
+  z-index: 1;
+  text-align: center;
+}
+
+.nav-open a {
+  padding: 15px;
+}

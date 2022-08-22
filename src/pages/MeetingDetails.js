@@ -4,7 +4,6 @@ import AttendeeTable from '../components/AttendeeTable';
 import { closeMeeting, getAttendees } from '../API';
 import { getToken } from '../App';
 
-
 export default function MeetingDetails() {
   let { meetingId } = useParams();
 
@@ -15,15 +14,7 @@ export default function MeetingDetails() {
 
   useEffect(() => {
     const fetchAttendeeData = async () => {
-
-      const start = new Date();
-      start.setDate(start.getDate() - 30);
-
-      const end = new Date();
-      end.setDate(end.getDate() + 1);
-
-      const res = await fetch(process.env.REACT_APP_API_URL + "/rbapi/attendees?meetingId=" + meetingId);
-      const data = await res.json();
+      const data = await getAttendees(meetingId);
       setAttendeeData(data);
     };
     fetchAttendeeData();

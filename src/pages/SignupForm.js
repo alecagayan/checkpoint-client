@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import Toast from '../components/toast/Toast';
+import { registerUser } from '../API';
 
-async function registerUser(credentials) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(data => data.json())
-   }
-   
 
 export default function SignupForm () {
     const [id, setID] = useState();
