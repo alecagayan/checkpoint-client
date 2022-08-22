@@ -1,6 +1,6 @@
 import React from 'react';
-import UserTable from './UserTable';
-import AddUser from './AddUser';
+import UserTable from '../components/UserTable';
+import AddUser from '../components/AddUser';
 
 class Users extends React.Component {
   constructor(props) {

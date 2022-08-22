@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import ReportUserTable from './ReportUserTable';
-import MeetingTable from './MeetingTable';
-import AddUser from './AddUser';
-import StartMeeting from './StartMeeting';
+import ReportUserTable from '../components/ReportUserTable';
+import MeetingTable from '../components/MeetingTable';
+import AddUser from '../components/AddUser';
+import StartMeeting from '../components/StartMeeting';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

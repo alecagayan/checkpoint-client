@@ -11,10 +11,13 @@ import {
   LineElement,
 //  PointElement,
   Tooltip,
-  BarElement
+  BarElement,
+  PointElement,
+  LineController
 } from 'chart.js';
 
-import { BarChart }  from './charts/BarChart';
+import { BarChart }  from '../components/charts/BarChart';
+import { LineChart } from '../components/charts/LineChart';
 
 Chart.register(
 //  LineController,
@@ -25,7 +28,9 @@ Chart.register(
   LinearScale,
   LineElement,
   BarController,
-  BarElement
+  BarElement,
+  PointElement,
+  LineController
 );
 
 function LogoutButton(props) {
@@ -127,7 +132,7 @@ class Home extends React.Component {
         <div className='chart-container'>
         <div className='chart'>
           <p>Recent meeting attendance:</p>
-        <BarChart chartData={this.state.meetingData} />
+        <LineChart chartData={this.state.meetingData} />
         </div>
         <div className='chart'>
           <p>Top attendees:</p>

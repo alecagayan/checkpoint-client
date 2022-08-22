@@ -1,23 +1,28 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
+import { getToken } from '../App';
+import { closeMeeting } from '../API';
 
 export function handleMeetingAttendance(meetingId) {
-
   window.open(`/checkin/${meetingId}`);
-
 }
 
-export function handleMeetingReport(meetingId) {
 
-  window.open(`/meetingreport/${meetingId}`);
 
+export async function handleMeetingClose(meetingId) {
+  
+  const result = await closeMeeting({
+      meetingId: meetingId,
+      token: getToken()
+  });
+  
 }
 
-export function handleMeetingClose(meetingId) {
-  console.log('need to close: ' + meetingId);
-}
 
 export default function MeetingTable({ data }) {
+
+    const navigate = useNavigate();
 
     // Create a state
     const [filterInput, setFilterInput] = useState("");
@@ -49,21 +54,23 @@ export default function MeetingTable({ data }) {
                 accessor: "opentime"
             },
             {
+                Header: "Opened By",
+                accessor: "openedby"
+            },
+            {
                 Header: "Close Time",
                 accessor: "closetime"
+            },
+            {
+                Header: "Attendees",
+                accessor: "attendee_count"
             },
             {
                 Header: "Actions",
                 Cell: ({ cell }) => (
                   <div>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingAttendance(cell.row.values.id)} hidden={ cell.row.values.closetime != ""}>
-                      Record Attendance
-                    </button>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingClose(cell.row.values.id)} hidden={ cell.row.values.closetime != ""}>
-                      End Meeting
-                    </button>
-                    <button value={cell.row.values.id} onClick={ () => handleMeetingReport(cell.row.values.id)}>
-                      View Report
+                    <button value={cell.row.values.id} onClick={ () =>  navigate(`/meeting/${cell.row.values.id}`)}>
+                      Details
                     </button>
                   </div>
                 )

@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
-import CheckinForm from './components/CheckinForm';
-import Dashboard from './components/Dashboard';
-import Home from './components/Home';
+import LoginForm from './pages/LoginForm';
+import SignupForm from './pages/SignupForm';
+import CheckinForm from './pages/CheckinForm';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
 import Home2 from './components/Home2';
-import MeetingReport from './components/MeetingReport';
-import Report from './components/Report';
-import Users from './components/Users';
-import Meetings from './components/Meetings';
+import MeetingDetails from './pages/MeetingDetails';
+import Report from './pages/Report';
+import Users from './pages/Users';
+import Meetings from './pages/Meetings';
 import Navbar from './components/navbar/Navbar';
 
 
@@ -55,10 +55,10 @@ export default function App() {
               <CheckinForm />
             </RequireAuth>
           } />
-          <Route path="/meetingreport/:meetingId" element = {
+          <Route path="/meeting/:meetingId" element = {
             <RequireAuth>
               <Navbar />
-              <MeetingReport />
+              <MeetingDetails />
             </RequireAuth>
           } />
           <Route path="/report" element={

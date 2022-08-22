@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import Toast from './toast/Toast';
+import Toast from '../components/toast/Toast';
 import PropTypes from 'prop-types';
 import { getToken } from '../App';
 
@@ -46,9 +46,9 @@ export default function CheckinForm({ setToken }) {
             token: storedToken,
             meetingId
         });
-        console.log('we received result: ', result);
+
+        setStudentId("");
         if (result.result === "1") {    
-            setStudentId("");
             showToast('success');
         }
         else {

@@ -1,6 +1,6 @@
 import React from 'react';
-import MeetingTable from './MeetingTable';
-import StartMeeting from './StartMeeting';
+import MeetingTable from '../components/MeetingTable';
+import StartMeeting from '../components/StartMeeting';
 
 
 class Meetings extends React.Component {

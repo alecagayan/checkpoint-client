@@ -1,31 +1,21 @@
 import React from "react";
+import { getToken } from "../App";
+import { startMeeting } from "../API";
+import { useNavigate } from "react-router-dom";
 
-async function startMeeting(meetingData) {
-    console.log("startMeeting: ", meetingData);
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/startmeeting', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(meetingData)
-    })
-      .then(data => data.json())
-   }
+async function handleStartMeeting(navigate) {
+  const result = await startMeeting({
+    token: getToken()
+  });
 
+  if (result.meeting) {
+    navigate(`/meeting/${result.meeting}`);
+  }
+}
 
-
-class StartMeeting extends React.Component {
-    
-    handleStartMeeting = async e => {    
-        e.preventDefault();
-        const result = await startMeeting({});
-    }
-        
-    render () {
-        return (
-            <button onClick={this.handleStartMeeting}>Start Meeting</button>
-        );
-    }
-    }
-
-    export default StartMeeting;
+export default function StartMeeting() {
+  const navigate = useNavigate();
+  return (
+    <button onClick={() => handleStartMeeting(navigate)}>Start Meeting</button>
+  );
+}
