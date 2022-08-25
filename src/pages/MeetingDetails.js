@@ -26,8 +26,20 @@ export default function MeetingDetails() {
         <h2>Meeting Details</h2>
         <p>Meeting ID: {meetingId}</p>
 
-        {/* close meeting button */}
-        <button onClick={() => {
+        {/* check into meeting button */}
+        <button className="normalbutton" onClick={() => {
+          sessionStorage.setItem('kiosk', 'true');
+          navigate(`/checkin/${meetingId}`);
+        }}>Launch Check-In Kiosk</button>
+        <p>The Check-In Kiosk allows members to check-in/check-out for the meeting. Your current session will be put in a limited-access mode to prevent unintended access to the admin interface.</p>
+
+        <br/>
+        
+        <AttendeeTable data={attendeeData} />
+
+        <br/>
+
+        <button className="dangerbutton" onClick={() => {
           closeMeeting({
             meetingId: meetingId,
             token: getToken()
@@ -35,14 +47,7 @@ export default function MeetingDetails() {
           navigate(`/meetings`);
         }}>Close Meeting</button>
 
-        {/* check into meeting button */}
-        <button onClick={() => {
-          navigate(`/checkin/${meetingId}`);
-        }}>Check In</button>
-        <br/>
-        <br/>
-        
-        <AttendeeTable data={attendeeData} />
+
       </div>
 
 

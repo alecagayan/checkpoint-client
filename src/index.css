@@ -9,6 +9,8 @@ body{
   margin: 0;
 }
 
+
+
 html{
   min-height: 100%;
   font-size: 100%;
@@ -45,6 +47,7 @@ html{
   max-width: 100%;
   
 }
+
 
 .row input{
   width: 80%;
@@ -92,8 +95,41 @@ html{
   transition: opacity 0.25s ease-out;
 }
 
+.check-out {
+  background-color: #ed4245 !important;
+}
+
+
+.check-in {
+  background-color: #009b00 !important;
+}
+
 .row button:hover{
   opacity: 0.8;
+}
+
+.normalbutton {
+  border-radius: 25px;
+  height: 30px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 600;
+  background: #0066ff;
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+}
+
+.dangerbutton {
+  border-radius: 25px;
+  height: 30px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 600;
+  background: #ed4245;
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
 }
 
 .signupbutton {
@@ -105,6 +141,17 @@ html{
   max-width: 100%;
   color : rgb(0,102,255);
 }
+
+.adminbutton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0rem;
+  padding-bottom: 2rem;
+  max-width: 100%;
+  color : rgb(172, 172, 172);
+}
+
 
 #button{
   padding-bottom: 1.5rem;

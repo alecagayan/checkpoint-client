@@ -11,9 +11,11 @@ import Report from './pages/Report';
 import Users from './pages/Users';
 import Meetings from './pages/Meetings';
 import Navbar from './components/navbar/Navbar';
+import CheckoutForm from './pages/CheckoutForm';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
+  sessionStorage.removeItem('kiosk');
 }
 
 export function getToken() {
@@ -22,11 +24,23 @@ export function getToken() {
   return userToken?.token
 }
 
+export function isKiosk() {
+  const kioskString = sessionStorage.getItem('kiosk');
+  if (kioskString === 'true') {
+    return true;
+  }
+}
 
 function RequireAuth({ children }) {
   const token = getToken();
   return (token) ? children : <Navigate to="/login" replace />;
 }
+
+function RequireAdmin({ children }) {
+  const token = getToken();
+  return (token && !isKiosk()) ? children : <Navigate to="/login" replace />;
+}
+
 
 export default function App() {
   useEffect(() => {
@@ -37,10 +51,10 @@ export default function App() {
     <BrowserRouter>
         <Routes>
           <Route index element = { 
-            <RequireAuth>
+            <RequireAdmin>
               <Navbar />
               <Home/>
-            </RequireAuth>
+            </RequireAdmin>
           } />
           <Route path="/login" element = {
             <LoginForm setToken={setToken} />
@@ -53,17 +67,22 @@ export default function App() {
               <CheckinForm />
             </RequireAuth>
           } />
-          <Route path="/meeting/:meetingId" element = {
+          <Route path="/checkout/:meetingId" element = {
             <RequireAuth>
-              <Navbar />
-              <MeetingDetails />
+              <CheckoutForm />
             </RequireAuth>
           } />
+          <Route path="/meeting/:meetingId" element = {
+            <RequireAdmin>
+              <Navbar />
+              <MeetingDetails />
+            </RequireAdmin>
+          } />
           <Route path="/report" element={
-            <RequireAuth>
+            <RequireAdmin>
               <Navbar />
               <Report />
-            </RequireAuth>
+            </RequireAdmin>
           } />
           <Route path="/dashboard" element={
             <RequireAuth>
@@ -72,16 +91,16 @@ export default function App() {
             </RequireAuth>
           } />
           <Route path="/users" element={
-            <RequireAuth>
+            <RequireAdmin>
               <Navbar />
               <Users />
-            </RequireAuth>
+            </RequireAdmin>
           } />
           <Route path="/meetings" element={
-            <RequireAuth>
+            <RequireAdmin>
               <Navbar />
               <Meetings />
-            </RequireAuth>
+            </RequireAdmin>
           } />
         </Routes>
     </BrowserRouter>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Toast from '../components/toast/Toast';
 import PropTypes from 'prop-types';
 import { getToken } from '../App';
-import { checkinUser } from '../API';
+import { checkoutUser } from '../API';
 
 export default function CheckinForm({ setToken }) {
     let { meetingId } = useParams();
@@ -29,7 +29,7 @@ export default function CheckinForm({ setToken }) {
             return;
         } 
 
-        const result = await checkinUser({
+        const result = await checkoutUser({
             login: studentId,
             token: storedToken,
             meetingId
@@ -50,7 +50,7 @@ export default function CheckinForm({ setToken }) {
             toastProperties = {
               id: toastList.length+1,
               title: 'Success',
-              description: 'User ' + studentId + ' checked in successfully.',
+              description: 'User ' + studentId + ' checked out successfully.',
               backgroundColor: '#0066ff'
             }
             break;
@@ -58,7 +58,7 @@ export default function CheckinForm({ setToken }) {
             toastProperties = {
               id: toastList.length+1,
               title: 'Error',
-              description: 'Failed to check in user ' + studentId + '.',
+              description: 'Failed to check out user ' + studentId + '.',
               backgroundColor: '#d9534f'
             }
             break;
@@ -70,7 +70,7 @@ export default function CheckinForm({ setToken }) {
 
     return (
         <div id="form">
-            <h2 id="headerTitle">Check In</h2>
+            <h2 id="headerTitle">Check Out</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <div className="row">
@@ -78,11 +78,9 @@ export default function CheckinForm({ setToken }) {
                         <input type="text" placeholder="Enter your student ID" value={studentId} onChange={e => setStudentId(e.target.value)} />
                     </div>
                     <div id="button" className="row">
-                        <button className="check-in">Check In</button>
+                        <button className="check-out">Check Out</button>
                     </div>
-                    <a href={"/checkout/" + meetingId} className='signupbutton' >Need to check out?</a>
-                    <a href="/signup" className='signupbutton' >Create an account</a>
-
+                    <a href={"/checkin/" + meetingId} className='signupbutton' >Need to check in?</a>
                     <a href={"/"} className='adminbutton' >Admin Login</a>
                 </div>
             </form>

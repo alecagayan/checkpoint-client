@@ -42,6 +42,10 @@ export default function ReportUserTable({ data }) {
               accessor: "attendee_count"
             },
             {
+              Header: "Hours",
+              accessor: "total_hours"
+            },
+            {
                 Header: "Actions",
                 Cell: ({ cell }) => (
                   <div>

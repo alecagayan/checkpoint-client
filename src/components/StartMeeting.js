@@ -16,6 +16,6 @@ async function handleStartMeeting(navigate) {
 export default function StartMeeting() {
   const navigate = useNavigate();
   return (
-    <button onClick={() => handleStartMeeting(navigate)}>Start Meeting</button>
+    <button className="normalbutton" onClick={() => handleStartMeeting(navigate)}>Start Meeting</button>
   );
 }

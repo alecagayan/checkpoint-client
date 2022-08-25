@@ -76,6 +76,17 @@ export async function checkinUser(checkinDetails) {
         .then(data => data.json())
 }
 
+export async function checkoutUser(checkoutDetails) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(checkoutDetails)
+    })
+        .then(data => data.json())
+}
+
 export async function registerUser(userDetails) {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/register', {
       method: 'POST',

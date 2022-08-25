@@ -59,7 +59,7 @@ class AddUser extends React.Component {
           };
       return (
         <div>
-          <button onClick={this.handleOpenModal}>Add User</button>
+          <button className="normalbutton" onClick={this.handleOpenModal}>Add User</button>
           <ReactModal 
              isOpen={this.state.showModal}
              contentLabel="Minimal Modal Example"
