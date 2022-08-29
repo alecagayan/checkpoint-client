@@ -66,10 +66,18 @@ export default function MeetingTable({ data }) {
                 accessor: "attendee_count"
             },
             {
+              Header: "Status",
+              Cell: ({ cell }) => (
+                <div>
+                  { cell.row.values.closetime === "" ? "Open" : "Closed"}
+                </div>
+              )
+            },
+            {
                 Header: "Actions",
                 Cell: ({ cell }) => (
                   <div>
-                    <button value={cell.row.values.id} onClick={ () =>  navigate(`/meeting/${cell.row.values.id}`)}>
+                    <button className="actionbutton" value={cell.row.values.id} onClick={ () =>  navigate(`/meeting/${cell.row.values.id}`)}>
                       Details
                     </button>
                   </div>

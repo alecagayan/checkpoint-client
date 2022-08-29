@@ -12,6 +12,7 @@ import Users from './pages/Users';
 import Meetings from './pages/Meetings';
 import Navbar from './components/navbar/Navbar';
 import CheckoutForm from './pages/CheckoutForm';
+import UserDetails from './pages/UserDetails';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -76,6 +77,12 @@ export default function App() {
             <RequireAdmin>
               <Navbar />
               <MeetingDetails />
+            </RequireAdmin>
+          } />
+          <Route path="/user/:userId" element = {
+            <RequireAdmin>
+              <Navbar />
+              <UserDetails />
             </RequireAdmin>
           } />
           <Route path="/report" element={

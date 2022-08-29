@@ -25,6 +25,7 @@ input {
 table {
   border-spacing: 0;
   border: 1px solid #ededed;
+  width: 100%;
 }
 table tr:last-child td {
   border-bottom: 0;
@@ -103,6 +104,12 @@ table th.sort-desc::before {
   margin: 30px;
 } 
 
+@media screen and (max-width: 600px) {
+  .chart {
+    width: 75%;;
+  }
+}
+
 .nav-open {
   display: block !important;
   position: absolute;
@@ -116,4 +123,38 @@ table th.sort-desc::before {
 
 .nav-open a {
   padding: 15px;
+}
+
+.form-row {
+  margin-bottom: 10px;
+}
+.form-label {
+  display: inline-block;
+  width: 100px;
+  text-align: left;
+}
+/*
+.form-input {
+  display: inline-block;
+  width: 80%;
+}*/
+.form-select {
+  display: inline-block;
+  font-size: 1.5em;
+  width: 200px;
+}
+
+.panel {
+  border-radius: 25px;
+  /*border: 2px solid #0033ff; */
+  border: 2px solid #d0d0d0;
+  padding: 20px;
+  background: #f0f0f0;
+  margin-bottom: 20px;
+}
+
+
+.entry-field {
+  display: inline-block;
+  margin-right: 20px;
 }

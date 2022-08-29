@@ -29,8 +29,12 @@ class Users extends React.Component {
     return(
       <div className='main'>
             <h2>Users</h2>
+            <p>View registered users.</p>
+            <div className='panel'>
+            <p>Type in a name to find a user:</p>
             <UserTable data={this.state.userData} />
             <AddUser />
+            </div>
         </div>
     );
   }

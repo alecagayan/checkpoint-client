@@ -114,10 +114,13 @@ html{
   font-size: 1.1rem;
   color: white;
   font-weight: 600;
-  background: #0066ff;
+  background: #0077ff;
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
+  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .dangerbutton {
@@ -130,7 +133,41 @@ html{
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
+  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
+
+.disabledbutton {
+  border-radius: 25px;
+  height: 30px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 600;
+  background: #7f7f7f;
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.actionbutton {
+  border-radius: 20px;
+  height: 20px;
+  font-size: 0.9rem;
+  color: white;
+  font-weight: 400;
+  background: #0077ff;
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  margin-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 
 .signupbutton {
   display: flex;

@@ -1,10 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
 
-export default function UserTable({ data }) {
-
-    const navigate = useNavigate();
+export default function AttendanceTable({ data }) {
 
     // Create a state
     const [filterInput, setFilterInput] = useState("");
@@ -15,40 +12,30 @@ export default function UserTable({ data }) {
       setFilter("name", value);
       setFilterInput(value);  
     };
-    
+
     const columns = useMemo(
         () => [
         {
             // first group - TV Show
-            Header: "Users",
+            Header: "Attendance",
             // First group columns
             columns: [
             {
-                Header: "ID",
+                Header: "Meeting ID",
                 accessor: "id"
             },
             {
-                Header: "Name",
-                accessor: "name"
+                Header: "Meeting Date",
+                accessor: "opentime"
             },
             {
-                Header: "Login",
-                accessor: "login"
+                Header: "Checkin Time",
+                accessor: "checkintime"
             },
             {
-                Header: "Email",
-                accessor: "email"
-            },
-            {
-                Header: "Actions",
-                Cell: ({ cell }) => (
-                  <div>
-                    <button className="actionbutton" value={cell.row.values.login} onClick={ () =>  navigate(`/user/${cell.row.values.id}`)}>
-                      Details
-                    </button>
-                  </div>
-                )
-            }
+                Header: "Checkout Time",
+                accessor: "checkouttime"
+            },            
             ]
         }],
         []
@@ -58,8 +45,8 @@ export default function UserTable({ data }) {
       getTableProps,
       getTableBodyProps,
       headerGroups,
-      setFilter,
       prepareRow,
+      setFilter,
       page, // Instead of using 'rows', we'll use page,
       // which has only the rows for the active page
   

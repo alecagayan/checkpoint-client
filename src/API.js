@@ -32,6 +32,11 @@ export async function startMeeting(meetingData) {
         .then(data => data.json())
 }
 
+export async function getMeeting(meetingId) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/meeting?meetingId=' + meetingId)
+        .then(data => data.json())
+}
+
 export async function closeMeeting(meetingData) {
     console.log("closeMeeting: ", meetingData);
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/closemeeting', {
@@ -49,6 +54,16 @@ export async function getAttendees(meetingId) {
         .then(data => data.json())
 }
 
+export async function getAttendance(userId) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/attendance?userId=' + userId)
+        .then(data => data.json())
+}
+
+export async function getUser(userId) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/user?userId=' + userId)
+        .then(data => data.json())
+}
+
 export async function addUser(userData) {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/adduser', {
         method: 'POST',
@@ -59,6 +74,18 @@ export async function addUser(userData) {
     })
         .then(data => data.json())
 }
+
+export async function updateUser(userData) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/updateuser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+        .then(data => data.json())
+}
+
 
 export async function getUsers() {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/users')

@@ -49,6 +49,7 @@ class Report extends React.Component {
     return(
         <div className='main'>
             <h2>Report</h2>
+            <div className='panel'>
             Select a date range:
             <DatePicker
                 selected={this.state.startDate}
@@ -58,6 +59,7 @@ class Report extends React.Component {
                 selectsRange
             />
             <ReportUserTable data={this.state.userData} />
+            </div>
         </div>
     );
   }
