@@ -73,17 +73,17 @@ export default function CheckinForm({ setToken }) {
             <h2 id="headerTitle">Check In</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div className="row">
+                    <div className="row large">
                         <label>ID</label>
                         <input type="text" placeholder="Enter your student ID" value={studentId} onChange={e => setStudentId(e.target.value)} />
                     </div>
-                    <div id="button" className="row">
+                    <div id="button" className="row large">
                         <button className="check-in">Check In</button>
                     </div>
-                    <a href={"/checkout/" + meetingId} className='signupbutton' >Need to check out?</a>
-                    <a href="/signup" className='signupbutton' >Create an account</a>
+                    <a href={"/checkout/" + meetingId} className='signupbutton large' >Need to check out?</a>
+                    <a href="/signup" className='signupbutton large' >Create an account</a>
 
-                    <a href={"/"} className='adminbutton' >Admin Login</a>
+                    <a href={"/"} className='adminbutton large' >Admin Login</a>
                 </div>
             </form>
             <Toast toastlist={toastList} position="top-right" setList={setToastList} />

@@ -13,13 +13,12 @@ body{
 
 html{
   min-height: 100%;
-  font-size: 100%;
+  font-size: 80%;
 }
 
 #form{
   max-width: 500px;
   min-width: 300px;
-  /* max-height: 700px; */
   width: 30%;
   height: 60%;
   margin: 100px auto;
@@ -43,21 +42,28 @@ html{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
   max-width: 100%;
-  
+  font-size: 1.1rem;
 }
-
 
 .row input{
   width: 80%;
   box-sizing: border-box;
 	border: none;
-  font-size: 1.3rem;
-  padding-left: 1.5rem;
+  font-size: 1.2rem;
+  padding-left: 1.2rem;
   padding-bottom: 1rem;
   box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2);
   transition: box-shadow 0.2s ease-in;
+}
+
+.large {
+  font-size: 1.5rem;
+}
+
+.large input{
+  font-size: 1.5rem;
 }
 
 .row input:focus{
@@ -76,17 +82,16 @@ html{
 }
 
 .row label{
-  align-self: start;
-  padding-left: 4.5rem;
+  width: 80%;
   padding-bottom: 0.5rem;
-  color: rgba(187,187,187,0.9);
+  color: rgba(128, 128, 128, 0.9);
 }
 
 .row button{
   border-radius: 25px;
   width: 80%;
   height: 40px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: white;
   font-weight: 700;
   background: #0066ff;
@@ -95,10 +100,13 @@ html{
   transition: opacity 0.25s ease-out;
 }
 
+.large button {
+  font-size: 1.5rem;
+}
+
 .check-out {
   background-color: #ed4245 !important;
 }
-
 
 .check-in {
   background-color: #009b00 !important;

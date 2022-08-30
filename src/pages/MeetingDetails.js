@@ -13,7 +13,7 @@ function KioskLauncher(props) {
       <div>
         <button className="normalbutton" onClick={() => {
           sessionStorage.setItem('kiosk', 'true');
-          navigate(`/checkin/${props.meetingId}`);
+          navigate(`/checkin/${props.data.id}`);
         }}>Launch Check-In Kiosk</button>
         <p>The Check-In Kiosk allows members to check-in/check-out for the meeting. Your current session will be put in a limited-access mode to prevent unintended access to the admin interface.</p>
       </div>
@@ -31,7 +31,7 @@ function CloseButton(props) {
       <div>
         <button className="dangerbutton" onClick={() => {
           closeMeeting({
-            meetingId: props.meetingId,
+            meetingId: props.data.id,
             token: getToken()
           });
           navigate(`/meetings`);

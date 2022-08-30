@@ -83,13 +83,13 @@ class AddUser extends React.Component {
     render () {
         const customStyles = {
             content: {
-              top: '35%',
+              top: '10%',
               left: '50%',
               right: 'auto',
               bottom: 'auto',
               marginRight: '-50%',
               width: '30%',
-              transform: 'translate(-40%, -10%)',
+              transform: 'translate(-50%, 0%)',
               backgroundColor: '#f5f5f5',
               border: '1px solid #ccc',
               borderRadius: '25px',
@@ -107,37 +107,37 @@ class AddUser extends React.Component {
             <div className="modal">
             <h2>Add User</h2>
             <form onSubmit={this.handleSubmit}>
-                <div>
+                <div className="form-row">
                 <label className="form-label">
                     Name:</label>
-                    <input className="form-input" type="text" name="userName" value={this.state.userName} onChange={this.handleChange.bind(this)}/>
+                    <input className="form-input" type="text" name="userName" value={this.state.userName} onChange={this.handleChange.bind(this)} autoFocus/>
                 </div>
 
-                <div>
+                <div className="form-row">
                 <label className="form-label">
                     Email:</label>
                     <input className="form-input" type="text" name="userEmail" value={this.state.userEmail} onChange={this.handleChange.bind(this)}/>
                 </div>
 
-                <div>
+                <div className="form-row">
                 <label className="form-label">
                     Login ID:</label>
                     <input className="form-input" type="text" name="userLogin" value={this.state.userLogin} onChange={this.handleChange.bind(this)}/>
                 </div>
-                <div>
+                <div className="form-row">
                   <label className="form-label">Role:</label>
                   <select className="form-select" name="userRole" value={this.state.userRole} onChange={this.handleChange.bind(this)}>
                     <option value="0">Member</option>
                     <option value="1">Admin</option>
                   </select>
                 </div>
-                <div>
+                <div className="form-row">
                   <p>Password is required for Admin role only.</p>
                 <label className="form-label">
                     Password:</label>
                     <input className="form-input" type="password" name="userPassword" value={this.state.userPassword} onChange={this.handleChange.bind(this)}/>
                 </div>
-                <div>
+                <div className="form-row">
                 <label className="form-label">
                     Confirm password:</label>
                     <input className="form-input" type="password" name="userPasswordConfirm" value={this.state.userPasswordConfirm} onChange={this.handleChange.bind(this)}/>

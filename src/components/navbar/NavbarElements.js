@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const Nav = styled.nav`
 background: #0066ff;
-height: 75px;
+height: 70px;
 display: flex;
 justify-content: space-between;
 font-size: 1.25rem;
@@ -69,7 +69,8 @@ width: 100vw; */
 export const NavBtnLink = styled(Link)`
 border-radius: 4px;
 background: #ffffff;
-padding: 10px 22px;
+padding: 10px 18px;
+font-size: 1.1rem;
 color: #000000;
 outline: none;
 border: none;

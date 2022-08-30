@@ -58,18 +58,16 @@ export default function UserDetails() {
         <div className="form-group">
         <div className="entry-field">
           <label className="form-label">Name:</label>
-          <input type="text" name="name" value={userData.name} onChange={handleChange} />
+          <input className="form-input" type="text" name="name" value={userData.name} onChange={handleChange} />
         </div>
         <div className="entry-field">
           <label className="form-label">Email:</label>
-          <input type="text" name="email" value={userData.email} onChange={handleChange} />
+          <input className="form-input" type="text" name="email" value={userData.email} onChange={handleChange} />
         </div>
         <div className="entry-field">
           <label className="form-label">Login:</label>
-          <input type="text" name="login" value={userData.login} onChange={handleChange} />
+          <input className="form-input" type="text" name="login" value={userData.login} onChange={handleChange} />
         </div>
-        </div>
-        <div className="form-group">
         <div className="entry-field">
           <label className="form-label">Role:</label>
           <select className="form-select" name="role" value={userData.role} onChange={handleChange}>
