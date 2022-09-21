@@ -85,4 +85,3 @@ margin-left: 24px;
 	color: #808080;
 }
 `;
-

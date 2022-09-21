@@ -3,12 +3,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import AttendanceTable from '../components/AttendanceTable';
 import { getUser, getAttendance, updateUser } from '../API';
 import { getToken } from '../App';
+import Toast from '../components/toast/Toast';
+
 
 export default function UserDetails() {
   let { userId } = useParams();
 
   const [userData, setUserData] = useState({});
   const [attendanceData, setAttendanceData] = useState([]);
+
+  const [toastList, setToastList] = useState([]);
+  let toastProperties = null;
 
 
   useEffect(() => {
@@ -41,11 +46,42 @@ export default function UserDetails() {
       token: getToken()
     });
 
+    if (result.user) {
+      // show success toast
+      showToast('success', 'User updated successfully.');
+    } else {
+      // show error toast
+      showToast('error', 'Failed to update user.');
+    }
   }
 
   const handleChange = (event) => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };  
+
+  const showToast = (type, msg) => {
+    switch(type) {
+      case 'success':
+        toastProperties = {
+          id: toastList.length+1,
+          title: 'Success',
+          description: msg,
+          backgroundColor: '#0066ff'
+        }
+        break;
+      case 'error':
+        toastProperties = {
+          id: toastList.length+1,
+          title: 'Error',
+          description: msg,
+          backgroundColor: '#d9534f'
+        }
+        break;
+      default:
+        toastProperties = [];
+    }
+    setToastList([...toastList, toastProperties]);
+  };
 
 
   return (
@@ -93,9 +129,7 @@ export default function UserDetails() {
       <div className="panel">
         <AttendanceTable data={attendanceData} />
         </div>
+        <Toast toastlist={toastList} position="top-right" setList={setToastList} />
       </div>
-
-
-
   );
 }

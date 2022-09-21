@@ -16,7 +16,7 @@ import {
 
 import { BarChart }  from '../components/charts/BarChart';
 import { LineChart } from '../components/charts/LineChart';
-import { getRecentMeetings, getTopAttendees } from '../API';
+import { getRecentMeetings, getReportByDate, getTopAttendees } from '../API';
 
 Chart.register(
   Legend,
@@ -78,14 +78,14 @@ class Home extends React.Component {
         }
       )
 
-    getTopAttendees(start, end, 5)
+    getTopAttendees(start, end, 10)
       .then(
         (result) => {
           const chartData = {
             labels: result.map((entry) => entry.name),
             datasets: [
               {
-                label: 'Attendance Percentage',
+                label: 'Attended Hours',
                 data: result.map((entry) => entry.attendee_count),
                 backgroundColor: [
                   "#aa6600", 

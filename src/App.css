@@ -114,7 +114,7 @@ table th.sort-desc::before {
   display: block !important;
   position: absolute;
   width: 100%;
-  top: 75px;
+  top: 70px;
   background-color: #00aaff;
   padding: 20px;
   z-index: 1;

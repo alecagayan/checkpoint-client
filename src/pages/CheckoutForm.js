@@ -8,7 +8,6 @@ import { checkoutUser } from '../API';
 export default function CheckinForm({ setToken }) {
     let { meetingId } = useParams();
     const [studentId, setStudentId] = useState("");
-
     const [toastList, setToastList] = useState([]);
     let toastProperties = null;
 
@@ -37,20 +36,20 @@ export default function CheckinForm({ setToken }) {
 
         setStudentId("");
         if (result.result === "1") {    
-            showToast('success');
+            showToast('success', 'User ' + studentId + ' checked out successfully.');
         }
         else {
-            showToast('error');
+            showToast('error', 'Failed to check out user ' + studentId + '.');
         }
     }
 
-    const showToast = type => {
+    const showToast = (type, msg) => {
         switch(type) {
           case 'success':
             toastProperties = {
               id: toastList.length+1,
               title: 'Success',
-              description: 'User ' + studentId + ' checked out successfully.',
+              description: msg,
               backgroundColor: '#0066ff'
             }
             break;
@@ -58,7 +57,7 @@ export default function CheckinForm({ setToken }) {
             toastProperties = {
               id: toastList.length+1,
               title: 'Error',
-              description: 'Failed to check out user ' + studentId + '.',
+              description: msg,
               backgroundColor: '#d9534f'
             }
             break;
@@ -73,15 +72,15 @@ export default function CheckinForm({ setToken }) {
             <h2 id="headerTitle">Check Out</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div className="row large">
+                    <div className="row">
                         <label>ID</label>
                         <input type="text" placeholder="Enter your student ID" value={studentId} onChange={e => setStudentId(e.target.value)} />
                     </div>
-                    <div id="button" className="row large">
+                    <div id="button" className="row">
                         <button className="check-out">Check Out</button>
                     </div>
-                    <a href={"/checkin/" + meetingId} className='signupbutton large' >Need to check in?</a>
-                    <a href={"/"} className='adminbutton large' >Admin Login</a>
+                    <a href={"/checkin/" + meetingId} className='signupbutton' >Need to check in?</a>
+                    <a href={"/"} className='adminbutton' >Admin Login</a>
                 </div>
             </form>
             <Toast toastlist={toastList} position="top-right" setList={setToastList} />

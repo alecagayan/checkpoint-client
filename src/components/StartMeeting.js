@@ -11,6 +11,9 @@ async function handleStartMeeting(navigate) {
   if (result.meeting) {
     navigate(`/meeting/${result.meeting}`);
   }
+  else {
+    alert("Failed to start meeting, please check there is not a meeting already open!");
+  }
 }
 
 export default function StartMeeting() {

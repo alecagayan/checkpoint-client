@@ -13,6 +13,7 @@ import Meetings from './pages/Meetings';
 import Navbar from './components/navbar/Navbar';
 import CheckoutForm from './pages/CheckoutForm';
 import UserDetails from './pages/UserDetails';
+import ForgotPassword from './pages/ForgotPassword';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -62,6 +63,9 @@ export default function App() {
             } />
           <Route path="/signup" element = {
             <SignupForm />
+            } />
+          <Route path="/forgot" element = {
+            <ForgotPassword />
             } />
           <Route path="/checkin/:meetingId" element = {
             <RequireAuth>
@@ -113,3 +117,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

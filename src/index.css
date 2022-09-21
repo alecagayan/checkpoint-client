@@ -13,7 +13,7 @@ body{
 
 html{
   min-height: 100%;
-  font-size: 80%;
+  font-size: 100%;
 }
 
 #form{
@@ -58,14 +58,6 @@ html{
   transition: box-shadow 0.2s ease-in;
 }
 
-.large {
-  font-size: 1.5rem;
-}
-
-.large input{
-  font-size: 1.5rem;
-}
-
 .row input:focus{
    box-shadow: inset 0px -3px 0px 0px #0066ff;
    outline: none;
@@ -98,10 +90,6 @@ html{
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
-}
-
-.large button {
-  font-size: 1.5rem;
 }
 
 .check-out {
@@ -238,5 +226,3 @@ html{
    padding-top: 2rem;
    margin-top: 1.5rem;
 }
-
-

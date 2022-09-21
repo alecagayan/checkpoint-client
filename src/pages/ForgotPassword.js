@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import PropTypes from 'prop-types';
-import { loginUser } from '../API';   
+import { passwordReset } from '../API';   
 import Toast from '../components/toast/Toast';
 
 
-export default function LoginForm ({setToken}) {
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
+export default function ForgotPassword ({setToken}) {
+    const [email, setEmail] = useState();
     const navigate = useNavigate();
 
     const [toastList, setToastList] = useState([]);
@@ -15,25 +14,31 @@ export default function LoginForm ({setToken}) {
     
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
-          username,
-          password
+        const result = await passwordReset({
+          email
         });
-        if (token.token) {
-            setToken(token);
-            navigate("/");
+        if (result.result === "1") {
+            showToast('succcess', 'Password reset email sent to ' + email + '.');
         } else {
-            showToast('error');
+            showToast('error', 'Failed to send password reset email to ' + email + '.');
         }
     }
 
-    const showToast = type => {
+    const showToast = (type, msg) => {
         switch(type) {
+          case 'success':
+            toastProperties = {
+              id: toastList.length+1,
+              title: 'Success',
+              description: msg,
+              backgroundColor: '#0066ff'
+            }
+            break;
           case 'error':
             toastProperties = {
               id: toastList.length+1,
               title: 'Error',
-              description: 'Invalid username or password.',
+              description: msg,
               backgroundColor: '#d9534f'
             }
             break;
@@ -45,21 +50,17 @@ export default function LoginForm ({setToken}) {
 
     return(
     <div id="form">
-        <h2 id="headerTitle">Admin Login</h2>
+        <h2 id="headerTitle">Forgot Password</h2>
         <form onSubmit={handleSubmit}>
         <div>
              <div className="row">
-                 <label>Username</label>
-                <input type="text" placeholder="Enter your username" onChange={e => setUserName(e.target.value)} />
+                 <label>Email Address</label>
+                <input type="text" placeholder="Enter your email address" onChange={e => setEmail(e.target.value)} />
             </div> 
-            <div className="row">
-                 <label>Password</label>
-                <input type="password" placeholder="Enter your password" onChange={e => setPassword(e.target.value)} />
-            </div>
             <div id="button" className="row">
-                <button>Log In</button>
+                <button>Send Reset Link</button>
             </div> 
-            <a href="/forgot" className='signupbutton' >Forgot Password</a>
+            <a href="/login" className='signupbutton' >Back to Login</a>
 
         </div>
         </form>
@@ -67,8 +68,3 @@ export default function LoginForm ({setToken}) {
     </div>
     )
 }
-  
-
-LoginForm.propTypes = {
-    setToken: PropTypes.func.isRequired
-};

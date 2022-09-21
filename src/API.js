@@ -124,11 +124,29 @@ export async function registerUser(userDetails) {
     })
       .then(data => data.json())
 }
+
+export async function passwordReset(userDetails) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/passwordreset', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userDetails)
+    })
+      .then(data => data.json())
+}
    
 export async function getReportByDate(startDate, endDate) {
     let startDateStr = startDate.toISOString().substring(0, 10);
     let endDateStr = endDate.toISOString().substring(0, 10);
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/reportbydate?startDate=' + startDateStr + '&endDate=' + endDateStr)
+        .then(data => data.json())
+}
+
+export async function getRawDataByDate(startDate, endDate) {
+    let startDateStr = startDate.toISOString().substring(0, 10);
+    let endDateStr = endDate.toISOString().substring(0, 10);
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/rawdatabydate?startDate=' + startDateStr + '&endDate=' + endDateStr)
         .then(data => data.json())
 }
 
@@ -138,3 +156,4 @@ export async function getTopAttendees(startDate, endDate, limit) {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/topattendees?startDate=' + startDateStr + '&endDate=' + endDateStr + '&limit=' + limit)
         .then(data => data.json())
 }
+

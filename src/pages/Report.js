@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import ReportUserTable from '../components/ReportUserTable';
-import { getReportByDate } from '../API';
+import { getRawDataByDate, getReportByDate } from '../API';
+import { CSVLink } from "react-csv";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,6 +15,7 @@ class Report extends React.Component {
     this.state = {
       userData: [],
       meetingData: [],
+      rawData: [],
       IsApiError: false,
         startDate: new Date(),
         endDate: new Date()
@@ -40,9 +42,20 @@ class Report extends React.Component {
                 this.setState({ IsApiError: true });
             }  
         )
+      getRawDataByDate(start, end)
+      .then(
+        (result) => {
+            this.setState({
+                rawData: result
+                
+            });
+          }, 
+        (error) => {
+            this.setState({ IsApiError: true });
+        }  
+    )
     }
   }
-
 
   render () {
 
@@ -60,6 +73,8 @@ class Report extends React.Component {
             />
             <ReportUserTable data={this.state.userData} />
             </div>
+            <CSVLink data={this.state.rawData} filename="rawdata.csv" className="normalbutton">Download Raw Data</CSVLink>
+
         </div>
     );
   }

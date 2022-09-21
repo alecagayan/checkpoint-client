@@ -46,5 +46,4 @@ class Meetings extends React.Component {
   }
 }
 
-
 export default Meetings;

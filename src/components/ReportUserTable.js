@@ -1,10 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
 
-function handleUserEdit(userId) {
-  console.log('need to edit: ' + userId);
-}
-
 
 export default function ReportUserTable({ data }) {
 
@@ -22,7 +18,7 @@ export default function ReportUserTable({ data }) {
         () => [
         {
             // first group - TV Show
-            Header: "Users",
+            Header: "Attendance Report",
             // First group columns
             columns: [
             {
@@ -44,16 +40,6 @@ export default function ReportUserTable({ data }) {
             {
               Header: "Hours",
               accessor: "total_hours"
-            },
-            {
-                Header: "Actions",
-                Cell: ({ cell }) => (
-                  <div>
-                    <button value={cell.row.values.login} onClick={ () => handleUserEdit(cell.row.values.login)}>
-                      Details
-                    </button>
-                  </div>
-                )
             }
             ]
         }],
