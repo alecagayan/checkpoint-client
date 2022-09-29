@@ -54,13 +54,31 @@ export async function getAttendees(meetingId) {
         .then(data => data.json())
 }
 
-export async function getAttendance(userId) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/attendance?userId=' + userId)
+export async function getAttendance(userId, startDate, endDate) {
+    let startDateStr = startDate.toISOString().substring(0, 10);
+    let endDateStr = endDate.toISOString().substring(0, 10);
+    console.log("getAttendance: ", userId, startDate, endDate);
+
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/attendance?userId=' + userId + '&startDate=' + startDateStr + '&endDate=' + endDateStr)
+        .then(data => data.json())
+
+    
+}
+
+export async function getPercentages(userId, startDate, endDate) {
+    let startDateStr = startDate.toISOString().substring(0, 10);
+    let endDateStr = endDate.toISOString().substring(0, 10);
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/percentages?userId=' + userId + '&startDate=' + startDateStr + '&endDate=' + endDateStr)
         .then(data => data.json())
 }
 
 export async function getUser(userId) {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/user?userId=' + userId)
+        .then(data => data.json())
+}
+
+export async function getUserByLogin(login) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/userbylogin?login=' + login)
         .then(data => data.json())
 }
 

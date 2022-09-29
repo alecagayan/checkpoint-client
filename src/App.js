@@ -14,6 +14,8 @@ import Navbar from './components/navbar/Navbar';
 import CheckoutForm from './pages/CheckoutForm';
 import UserDetails from './pages/UserDetails';
 import ForgotPassword from './pages/ForgotPassword';
+import UserView from './pages/UserView';
+import ViewAttendanceForm from './pages/ViewAttendanceForm';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -67,6 +69,12 @@ export default function App() {
           <Route path="/forgot" element = {
             <ForgotPassword />
             } />
+          <Route path="/userview/:login" element = {
+              <UserView />
+          } />
+          <Route path="/view" element = {
+              <ViewAttendanceForm />
+          } />
           <Route path="/checkin/:meetingId" element = {
             <RequireAuth>
               <CheckinForm />

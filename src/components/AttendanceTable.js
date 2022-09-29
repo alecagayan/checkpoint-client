@@ -73,11 +73,11 @@ export default function AttendanceTable({ data }) {
     // Render the UI for your table
     return (
       <>
-        <input
+        {/* <input
           value={filterInput}
           onChange={handleFilterChange}
           placeholder={"Search by name"}
-        />
+        /> */}
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (

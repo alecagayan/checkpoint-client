@@ -58,7 +58,6 @@ class Report extends React.Component {
   }
 
   render () {
-
     return(
         <div className='main'>
             <h2>Report</h2>

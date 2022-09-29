@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import { loginUser } from '../API';   
 import Toast from '../components/toast/Toast';
 
-
-export default function LoginForm ({setToken}) {
+export default function ViewAttendanceForm ({setToken}) {
     const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
     const navigate = useNavigate();
 
     const [toastList, setToastList] = useState([]);
@@ -15,16 +13,7 @@ export default function LoginForm ({setToken}) {
     
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
-          username,
-          password
-        });
-        if (token.token) {
-            setToken(token);
-            navigate("/");
-        } else {
-            showToast('error');
-        }
+            navigate(`/userview/${username}`);
     }
 
     const showToast = type => {
@@ -45,23 +34,17 @@ export default function LoginForm ({setToken}) {
 
     return(
     <div id="form">
-        <h2 id="headerTitle">Admin Login</h2>
+        <h2 id="headerTitle">User Login</h2>
         <form onSubmit={handleSubmit}>
         <div>
              <div className="row">
                  <label>Username</label>
                 <input type="text" placeholder="Enter your username" onChange={e => setUserName(e.target.value)} />
             </div> 
-            <div className="row">
-                 <label>Password</label>
-                <input type="password" placeholder="Enter your password" onChange={e => setPassword(e.target.value)} />
-            </div>
-            <div id="button" className="row">
-                <button>Log In</button>
-            </div> 
-            <a href="/view" className='signupbutton' >Not an admin? View your attendance</a>
-            <a href="/viewattendance" className='adminbutton' >Forgot Password</a>
 
+            <div id="button" className="row">
+                <button>View</button>
+            </div> 
 
         </div>
         </form>
@@ -69,8 +52,3 @@ export default function LoginForm ({setToken}) {
     </div>
     )
 }
-  
-
-LoginForm.propTypes = {
-    setToken: PropTypes.func.isRequired
-};

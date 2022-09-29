@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
 
-
 export default function ReportUserTable({ data }) {
 
     // Create a state
@@ -36,6 +35,11 @@ export default function ReportUserTable({ data }) {
             {
               Header: "Attendance, %",
               accessor: "attendee_count"
+            },
+            {
+              Header: "Hour Percentage",
+              accessor: "hour_percentage",
+              Cell: ({ value }) => (value < 60 ? <span style={{ color: 'red' }}>{value}</span> : value < 80 ? <span style={{ color: 'orange' }}>{value}</span> : value)
             },
             {
               Header: "Hours",
