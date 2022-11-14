@@ -19,6 +19,7 @@ export default function UserDetails() {
   useEffect(() => {
     const fetchUserData = async () => {
       const data = await getUser(userId);
+      console.log("data", data);
       setUserData(data);
     };
     fetchUserData();
@@ -27,6 +28,7 @@ export default function UserDetails() {
   useEffect(() => {
     const fetchAttendanceData = async () => {
       const data = await getAttendance(userId);
+      console.log("data", data);
       setAttendanceData(data);
     }
     fetchAttendanceData();

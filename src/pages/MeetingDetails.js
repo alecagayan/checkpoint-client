@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import AttendeeTable from '../components/AttendeeTable';
-import { closeMeeting, getAttendees, getMeeting } from '../API';
+import { closeMeeting, getAttendees, getMeeting, changeMeetingType } from '../API';
 import { getToken } from '../App';
 
 function KioskLauncher(props) {
 
   const navigate = useNavigate();
+
+
 
   if (props.data.closetime === "") {
     return (
@@ -26,6 +28,12 @@ function CloseButton(props) {
 
   const navigate = useNavigate();
 
+  const [optional, setOptional] = React.useState(true);
+
+  const handleOptional = () => {
+    setOptional(!optional);
+  };
+
   if (props.data.closetime === "") {
     return (
       <div>
@@ -37,6 +45,16 @@ function CloseButton(props) {
           navigate(`/meetings`);
         }}>Close Meeting</button>
         <p>Clicking on the "Close Meeting" button will end the meeting and automatically check-out all attendees. Make sure that all attending members have checked-in as this operation cannot be undone! </p>
+
+        {/*button toggle for optional or required meetings
+        changes the text and class of the button*/}
+        <button className="normalbutton" onClick={() => {
+          changeMeetingType({
+            meetingId: props.data.id,
+            token: getToken()
+          });
+          handleOptional();
+        }}>{optional ? "This Meeting Is Required" : "This Meeting Is Optional"} </button>
       </div>
     );
   }
@@ -72,25 +90,26 @@ export default function MeetingDetails() {
     <div className="main">
       <h2>Meeting Details</h2>
       <div className="panel-container">
-      <div className="panel">
-      <p>Meeting ID: {meetingId}
-      <p>Meeting Date: {meetingData?.opentime}</p>
-      <button style={{float: "right"}} className={meetingData?.next_meeting_id ? "normalbutton" : "disabledbutton"} onClick={() => {
-        if (meetingData.next_meeting_id)
-          navigate(`/meeting/${meetingData.next_meeting_id}`);
-      }}>Next</button> 
-      <button style={{float: "right"}} className={meetingData?.prev_meeting_id ? "normalbutton" : "disabledbutton"} onClick={() => {
-        if (meetingData.prev_meeting_id)
-          navigate(`/meeting/${meetingData.prev_meeting_id}`);
-      }}>Prev</button></p>
-      <p>Meeting Status: {meetingData.closetime === "" ? "Open" : "Closed"}</p>
-      <KioskLauncher data={meetingData}/>
-      <CloseButton data={meetingData}/>
-      </div>
+        <div className="panel">
+          <p>Meeting ID: {meetingId}
+            <p>Meeting Date: {meetingData?.opentime}</p>
+            <button style={{ float: "right" }} className={meetingData?.next_meeting_id ? "normalbutton" : "disabledbutton"} onClick={() => {
+              if (meetingData.next_meeting_id)
+                navigate(`/meeting/${meetingData.next_meeting_id}`);
+            }}>Next</button>
+            <button style={{ float: "right" }} className={meetingData?.prev_meeting_id ? "normalbutton" : "disabledbutton"} onClick={() => {
+              if (meetingData.prev_meeting_id)
+                navigate(`/meeting/${meetingData.prev_meeting_id}`);
+            }}>Prev</button></p>
+          <p>Meeting Status: {meetingData.closetime === "" ? "Open" : "Closed"}</p>
+          <p>Meeting Type: {meetingData.type === "1" ? "Optional" : "Required"}</p>
+          <KioskLauncher data={meetingData} />
+          <CloseButton data={meetingData} />
+        </div>
 
-      <div className="panel">
-      <AttendeeTable data={attendeeData} />
-      </div>
+        <div className="panel">
+          <AttendeeTable data={attendeeData} />
+        </div>
       </div>
 
     </div>
@@ -98,4 +117,5 @@ export default function MeetingDetails() {
 
   );
 }
+
 

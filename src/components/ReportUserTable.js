@@ -33,13 +33,13 @@ export default function ReportUserTable({ data }) {
                 accessor: "email"
             },
             {
-              Header: "Attendance, %",
-              accessor: "attendee_count"
+              Header: "Hours, %",
+              accessor: "hour_percentage",
+              Cell: ({ value }) => (value < 60 ? <span style={{ color: '#EF476F' }}>{value}</span> : value < 80 ? <span style={{ color: '#FF914D' }}>{value}</span> : value)
             },
             {
-              Header: "Hour Percentage",
-              accessor: "hour_percentage",
-              Cell: ({ value }) => (value < 60 ? <span style={{ color: 'red' }}>{value}</span> : value < 80 ? <span style={{ color: 'orange' }}>{value}</span> : value)
+              Header: "Meetings, %",
+              accessor: "attendee_count"
             },
             {
               Header: "Hours",

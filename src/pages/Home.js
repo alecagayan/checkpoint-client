@@ -51,6 +51,8 @@ class Home extends React.Component {
     const end = new Date();
     end.setDate(end.getDate() + 1);
 
+    //colors https://coolors.co/0066ff-ef476f-ffd166-06d6a0-cdc7e5
+
 
     getRecentMeetings(10)
       .then(
@@ -62,7 +64,7 @@ class Home extends React.Component {
                 label: 'Number of Attendees',
                 data: result.map((entry) => entry.attendee_count),
                 backgroundColor: [
-                  "#006600", 
+                  "#ef476f", 
                 ]
               }
             ]
@@ -85,10 +87,10 @@ class Home extends React.Component {
             labels: result.map((entry) => entry.name),
             datasets: [
               {
-                label: 'Attended Hours',
+                label: 'Attended Meetings (%)',
                 data: result.map((entry) => entry.attendee_count),
                 backgroundColor: [
-                  "#aa6600", 
+                  "#06d6a0", 
                 ]
               }
             ]
@@ -124,6 +126,7 @@ class Home extends React.Component {
         </div>
         </div>
       </div>
+      
     );
   }
 }

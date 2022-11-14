@@ -32,6 +32,7 @@ export default function CheckinForm({ setToken }) {
         const result = await checkinUser({
             login: studentId,
             token: storedToken,
+            orgId: sessionStorage.getItem("orgId"),
             meetingId
         });
 

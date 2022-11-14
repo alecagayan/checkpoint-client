@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700&display=swap');
 
 body{
   background: rgb(34,193,195);
   background: url("./wave-login-bg.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  font-family: "work sans";
+  font-family: "ibm plex sans";
   margin: 0;
 }
 
@@ -24,11 +24,13 @@ html{
   margin: 100px auto;
   background-color: #f6f6f6;
   border-radius: 25px;
+  
+
 }
 
 #headerTitle{
   text-align: center;
-  font-family: 'open sans', sans-serif;
+  font-family: 'ibm plex sans', sans-serif;
   padding: 2rem 0;
   margin: 0;
   font-size: 2rem;
@@ -45,6 +47,8 @@ html{
   padding-top: 1rem;
   max-width: 100%;
   font-size: 1.1rem;
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 .row input{
@@ -90,14 +94,16 @@ html{
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 .check-out {
-  background-color: #ed4245 !important;
+  background-color: #EF476F !important;
 }
 
 .check-in {
-  background-color: #009b00 !important;
+  background-color: #06D6A0 !important;
 }
 
 .row button:hover{
@@ -110,13 +116,15 @@ html{
   font-size: 1.1rem;
   color: white;
   font-weight: 600;
-  background: #0077ff;
+  background: #0066ff;
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
   margin-right: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 .dangerbutton {
@@ -125,13 +133,15 @@ html{
   font-size: 1.1rem;
   color: white;
   font-weight: 600;
-  background: #ed4245;
+  background: #EF476F;
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
   margin-right: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 .disabledbutton {
@@ -147,6 +157,8 @@ html{
   margin-right: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 .actionbutton {
@@ -155,13 +167,15 @@ html{
   font-size: 0.9rem;
   color: white;
   font-weight: 400;
-  background: #0077ff;
+  background: #0066ff;
   border: 0px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
   margin-right: 5px;
   padding-left: 10px;
   padding-right: 10px;
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 
@@ -173,6 +187,8 @@ html{
   padding-bottom: 2rem;
   max-width: 100%;
   color : rgb(0,102,255);
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 .adminbutton {
@@ -183,6 +199,8 @@ html{
   padding-bottom: 2rem;
   max-width: 100%;
   color : rgb(172, 172, 172);
+  font-family: 'ibm plex sans', sans-serif;
+
 }
 
 

@@ -74,6 +74,10 @@ export default function MeetingTable({ data }) {
               )
             },
             {
+              Header: "Type",
+              accessor: "type"
+            },
+            {
                 Header: "Actions",
                 Cell: ({ cell }) => (
                   <div>

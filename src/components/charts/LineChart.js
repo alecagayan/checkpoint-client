@@ -19,6 +19,11 @@ export const LineChart = ({ chartData }) => {
               display: true,
               position: "bottom"
             }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }}
       />

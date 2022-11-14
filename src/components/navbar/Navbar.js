@@ -41,6 +41,7 @@ const Navbar = () => {
 				<NavBtn>
 					<NavBtnLink to='/login' onClick={() => {
 						sessionStorage.removeItem('token');
+						sessionStorage.removeItem('orgId');
 					}}>Logout</NavBtnLink>
 				</NavBtn>
 			</Nav>

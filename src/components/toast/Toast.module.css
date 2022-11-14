@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600,700&display=swap');
+
+
 .container {
     font-size: 14px;
     position: fixed;
     z-index: 10;
+    font-family: 'ibm plex sans', sans-serif;
+
   }
   
   .top-right {
@@ -43,6 +48,7 @@
   .title {
     font-weight: 700;
     font-size: 16px;
+    font-family: 'ibm plex sans', sans-serif;
     text-align: left;
     margin-top: 0;
     margin-bottom: 6px;
@@ -53,6 +59,8 @@
   .description {
     margin: 0;
     text-align: left;
+    font-family: 'ibm plex sans', sans-serif;
+
   }
   
   @keyframes toast-in-right {

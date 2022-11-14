@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import AttendanceTable from '../components/AttendanceTable';
-import { getUser, getAttendance, updateUser, getPercentages, getUserByLogin } from '../API';
+import { getUser, getAttendanceBetweenDates, updateUser, getPercentages, getUserByLogin } from '../API';
 import { getToken } from '../App';
 import Toast from '../components/toast/Toast';
 import DatePicker from "react-datepicker";
@@ -18,7 +18,7 @@ export default function UserView() {
     let toastProperties = null;
 
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());    
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -34,7 +34,7 @@ export default function UserView() {
         setEndDate(end);
 
         if (start && end) {
-            getAttendance(userData.id, start, end)
+            getAttendanceBetweenDates(userData.id, start, end)
                 .then(
                     (result) => {
                         setAttendanceData(result);

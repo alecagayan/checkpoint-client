@@ -16,6 +16,8 @@ import UserDetails from './pages/UserDetails';
 import ForgotPassword from './pages/ForgotPassword';
 import UserView from './pages/UserView';
 import ViewAttendanceForm from './pages/ViewAttendanceForm';
+import RegisterOrganization from './pages/RegisterOrganization';
+import ResetPassword from './pages/ResetPassword';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -74,6 +76,12 @@ export default function App() {
           } />
           <Route path="/view" element = {
               <ViewAttendanceForm />
+          } />
+          <Route path="/neworg" element = {
+              <RegisterOrganization />
+          } />
+          <Route path="/resetpassword/:passwordResetToken" element = {
+              <ResetPassword />
           } />
           <Route path="/checkin/:meetingId" element = {
             <RequireAuth>

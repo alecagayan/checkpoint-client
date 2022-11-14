@@ -1,3 +1,4 @@
+import { getToken } from "./App";
 
 export async function loginUser(credentials) {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/login', {
@@ -10,13 +11,16 @@ export async function loginUser(credentials) {
       .then(data => data.json())
 }
 
-export async function getMeetings() {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/meetings')
+
+export async function getMeetings() { 
+    console.log("token: " + getToken());
+    //replace all getToken plus characters with %2b
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/meetings?token=' + getToken().replace(/\+/g, '%2b'))
         .then(data => data.json())
 }
 
 export async function getRecentMeetings(limit) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/recentmeetings?limit=' + limit)
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/recentmeetings?limit=' + limit + '&token=' + getToken().replace(/\+/g, '%2b'))
         .then(data => data.json())
 }
 
@@ -49,20 +53,35 @@ export async function closeMeeting(meetingData) {
         .then(data => data.json())
 }
 
+export async function changeMeetingType(meetingData) {
+    console.log("changeMeetingType: ", meetingData);
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/changemeetingtype', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(meetingData)
+    })
+        .then(data => data.json())
+}
+
 export async function getAttendees(meetingId) {
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/attendees?meetingId=' + meetingId)
         .then(data => data.json())
 }
 
-export async function getAttendance(userId, startDate, endDate) {
+export async function getAttendance(userId) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/attendance?userId=' + userId)
+        .then(data => data.json())
+}
+
+export async function getAttendanceBetweenDates(userId, startDate, endDate) {
     let startDateStr = startDate.toISOString().substring(0, 10);
     let endDateStr = endDate.toISOString().substring(0, 10);
     console.log("getAttendance: ", userId, startDate, endDate);
 
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/attendance?userId=' + userId + '&startDate=' + startDateStr + '&endDate=' + endDateStr)
         .then(data => data.json())
-
-    
 }
 
 export async function getPercentages(userId, startDate, endDate) {
@@ -106,7 +125,7 @@ export async function updateUser(userData) {
 
 
 export async function getUsers() {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/users')
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/users?token=' + getToken().replace(/\+/g, '%2b'))
         .then(data => data.json())
 }
 
@@ -143,8 +162,19 @@ export async function registerUser(userDetails) {
       .then(data => data.json())
 }
 
-export async function passwordReset(userDetails) {
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/passwordreset', {
+export async function registerOrganization(orgDetails) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/registerorg', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orgDetails)
+    })
+      .then(data => data.json())
+}
+
+export async function forgotPassword(userDetails) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/forgotpassword', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -153,18 +183,29 @@ export async function passwordReset(userDetails) {
     })
       .then(data => data.json())
 }
+
+export async function resetPassword(userDetails) {
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/resetpassword', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userDetails)
+    })
+        .then(data => data.json())
+}
    
 export async function getReportByDate(startDate, endDate) {
     let startDateStr = startDate.toISOString().substring(0, 10);
     let endDateStr = endDate.toISOString().substring(0, 10);
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/reportbydate?startDate=' + startDateStr + '&endDate=' + endDateStr)
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/reportbydate?startDate=' + startDateStr + '&endDate=' + endDateStr + '&token=' + getToken().replace(/\+/g, '%2b'))
         .then(data => data.json())
 }
 
 export async function getRawDataByDate(startDate, endDate) {
     let startDateStr = startDate.toISOString().substring(0, 10);
     let endDateStr = endDate.toISOString().substring(0, 10);
-    return fetch(process.env.REACT_APP_API_URL + '/rbapi/rawdatabydate?startDate=' + startDateStr + '&endDate=' + endDateStr)
+    return fetch(process.env.REACT_APP_API_URL + '/rbapi/rawdatabydate?startDate=' + startDateStr + '&endDate=' + endDateStr + '&token=' + getToken().replace(/\+/g, '%2b'))
         .then(data => data.json())
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import PropTypes from 'prop-types';
-import { passwordReset } from '../API';   
+import { forgotPassword, passwordReset } from '../API';   
 import Toast from '../components/toast/Toast';
 
 
@@ -14,14 +14,16 @@ export default function ForgotPassword ({setToken}) {
     
     const handleSubmit = async e => {
         e.preventDefault();
-        const result = await passwordReset({
+        const result = await forgotPassword({
           email
         });
         if (result.result === "1") {
-            showToast('succcess', 'Password reset email sent to ' + email + '.');
+            showToast('success', 'Password reset email sent to ' + email + '.');
         } else {
             showToast('error', 'Failed to send password reset email to ' + email + '.');
         }
+
+        setEmail("");
     }
 
     const showToast = (type, msg) => {
@@ -55,12 +57,12 @@ export default function ForgotPassword ({setToken}) {
         <div>
              <div className="row">
                  <label>Email Address</label>
-                <input type="text" placeholder="Enter your email address" onChange={e => setEmail(e.target.value)} />
+                <input type="text" placeholder="Enter your email address" value={email} onChange={e => setEmail(e.target.value)} />
             </div> 
             <div id="button" className="row">
                 <button>Send Reset Link</button>
             </div> 
-            <a href="/login" className='signupbutton' >Back to Login</a>
+            <a href="/login" className='signupbutton'>Back to Login</a>
 
         </div>
         </form>

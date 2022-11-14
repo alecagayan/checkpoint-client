@@ -5,7 +5,7 @@ import { loginUser } from '../API';
 import Toast from '../components/toast/Toast';
 
 
-export default function LoginForm ({setToken}) {
+export default function LoginForm ({setToken, setOrg}) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function LoginForm ({setToken}) {
           password
         });
         if (token.token) {
-            setToken(token);
+          setToken(token);
             navigate("/");
         } else {
             showToast('error');
@@ -47,7 +47,7 @@ export default function LoginForm ({setToken}) {
     <div id="form">
         <h2 id="headerTitle">Admin Login</h2>
         <form onSubmit={handleSubmit}>
-        <div>
+        <div>      
              <div className="row">
                  <label>Username</label>
                 <input type="text" placeholder="Enter your username" onChange={e => setUserName(e.target.value)} />
@@ -60,8 +60,7 @@ export default function LoginForm ({setToken}) {
                 <button>Log In</button>
             </div> 
             <a href="/view" className='signupbutton' >Not an admin? View your attendance</a>
-            <a href="/viewattendance" className='adminbutton' >Forgot Password</a>
-
+            <a href="/forgot" className='adminbutton' >Forgot Password</a>
 
         </div>
         </form>
@@ -73,4 +72,5 @@ export default function LoginForm ({setToken}) {
 
 LoginForm.propTypes = {
     setToken: PropTypes.func.isRequired
+
 };

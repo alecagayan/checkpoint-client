@@ -1,41 +1,37 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { resetPassword } from '../API';
 import Toast from '../components/toast/Toast';
-import { registerUser } from '../API';
-import { getToken } from '../App';
 
 
-export default function SignupForm () {
-    const [id, setID] = useState();
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
+export default function ResetPasswordForm () {
+
+    let { passwordResetToken } = useParams();
+
+    const [password, setPassword] = useState();
+    const [repeatPassword, setRepeatPassword] = useState();
 
     const [toastList, setToastList] = useState([]);
     let toastProperties = null;
-
-    const storedToken = getToken();
 
     const navigate = useNavigate();
     
     const handleSubmit = async e => {
         e.preventDefault();
-        const result = await registerUser({
-          id,
-          name,
-          email,
-          token: storedToken
+        const result = await resetPassword({
+          password,
+          repeatPassword,
+          token: passwordResetToken
         });
         if (result.result === "1") {
             showToast('success');
-            navigate(`/checkin/${id}`);
+            navigate(`/login`);
         }
         else {
            showToast('error');
         }
-        setID("");
-        setName("");
-        setEmail("");
-
+        setPassword("");
+        setRepeatPassword("");
     }
 
     const showToast = type => {
@@ -44,7 +40,7 @@ export default function SignupForm () {
             toastProperties = {
               id: toastList.length+1,
               title: 'Success',
-              description: 'User ' + id + ' registered successfully.',
+              description: 'Password changed successfully.',
               backgroundColor: '#0066ff'
             }
             break;
@@ -52,7 +48,7 @@ export default function SignupForm () {
             toastProperties = {
               id: toastList.length+1,
               title: 'Error',
-              description: 'Failed to register user ' + id + '.',
+              description: 'Failed to change password.',
               backgroundColor: '#d9534f'
             }
             break;
@@ -64,23 +60,19 @@ export default function SignupForm () {
 
     return(
     <div id="form">
-        <h2 id="headerTitle">Register</h2>
+        <h2 id="headerTitle">Password Reset</h2>
         <form onSubmit={handleSubmit}>
         <div>
-             <div className="row">
-                 <label>User ID</label>
-                <input type="text" placeholder="Enter your ID" value={id} onChange={e => setID(e.target.value)} />
-            </div> 
             <div className="row">
-                 <label>Name</label>
-                <input type="text" placeholder="Enter your name" value={name} onChange={e => setName(e.target.value)} />
+                 <label>New Password</label>
+                <input type="password" placeholder="Enter a new password" value={password} onChange={e => setPassword(e.target.value)} />
             </div>
             <div className="row">
-                 <label>Email</label>
-                <input type="text" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} />
+                 <label>Repeat New Password</label>
+                <input type="password" placeholder="Confirm your new password" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
             </div>
             <div id="button" className="row">
-                <button>Register</button>
+                <button>Set New Password</button>
             </div>        
         </div>
         </form>

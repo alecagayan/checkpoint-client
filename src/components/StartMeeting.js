@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 async function handleStartMeeting(navigate) {
   const result = await startMeeting({
-    token: getToken()
+    token: getToken(),
+    orgId: sessionStorage.getItem("orgId")
   });
 
   if (result.meeting) {
