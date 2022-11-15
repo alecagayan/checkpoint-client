@@ -37,7 +37,8 @@ class Home extends React.Component {
 
     this.state = {
       meetingData: {},
-      attendeeData: {},
+      attendeeMeetingData: {},
+      attendeeHourData: {},
       IsApiError: false
     }
 
@@ -80,7 +81,7 @@ class Home extends React.Component {
         }
       )
 
-    getTopAttendees(start, end, 10)
+    getTopAttendees(start, end, 10, "meetings")
       .then(
         (result) => {
           const chartData = {
@@ -97,7 +98,33 @@ class Home extends React.Component {
           }
 
           this.setState({
-            attendeeData: chartData
+            attendeeMeetingData: chartData
+          });
+
+        },
+        (error) => {
+          this.setState({ IsApiError: true });
+        }
+      )
+
+      getTopAttendees(start, end, 10, "hours")
+      .then(
+        (result) => {
+          const chartData = {
+            labels: result.map((entry) => entry.name),
+            datasets: [
+              {
+                label: 'Attended Hours (%)',
+                data: result.map((entry) => entry.attendee_count),
+                backgroundColor: [
+                  "#0066ff", 
+                ]
+              }
+            ]
+          }
+
+          this.setState({
+            attendeeHourData: chartData
           });
 
         },
@@ -121,8 +148,12 @@ class Home extends React.Component {
         <LineChart chartData={this.state.meetingData} />
         </div>
         <div className='chart'>
-          <p>Top attendees:</p>
-        <BarChart chartData={this.state.attendeeData} />
+          <p>Top attendees by meeting:</p>
+        <BarChart chartData={this.state.attendeeMeetingData} />
+        </div>
+        <div className='chart'>
+          <p>Top attendees by hour:</p>
+        <BarChart chartData={this.state.attendeeHourData} />
         </div>
         </div>
       </div>
