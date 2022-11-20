@@ -9,7 +9,12 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 class Report extends React.Component {
+
+  
   constructor(props) {
+
+    const start = new Date();
+    start.setDate(start.getDate()-30);
     super(props);
 
     this.state = {
@@ -17,11 +22,12 @@ class Report extends React.Component {
       meetingData: [],
       rawData: [],
       IsApiError: false,
-        startDate: new Date(),
+        startDate: start,
         endDate: new Date()
     }
 
     this.onChange = this.onChange.bind(this);
+
   }
 
   
@@ -57,6 +63,9 @@ class Report extends React.Component {
     }
   }
 
+
+
+
   render () {
     return(
         <div className='main'>
@@ -69,6 +78,7 @@ class Report extends React.Component {
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 selectsRange
+
             />
             <ReportUserTable data={this.state.userData} />
             </div>

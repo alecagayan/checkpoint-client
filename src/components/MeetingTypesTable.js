@@ -1,7 +1,12 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTable, useFilters, useSortBy, usePagination } from 'react-table';
+import { getToken } from '../App';
+import { closeMeeting } from '../API';
 
-export default function ReportUserTable({ data }) {
+export default function MeetingTypesTable({ data }) {
+
+    const navigate = useNavigate();
 
     // Create a state
     const [filterInput, setFilterInput] = useState("");
@@ -12,45 +17,36 @@ export default function ReportUserTable({ data }) {
       setFilter("name", value);
       setFilterInput(value);  
     };
-    
+
     const columns = useMemo(
         () => [
         {
             // first group - TV Show
-            Header: "Attendance Report",
+            Header: "Meeting Types",
             // First group columns
             columns: [
+            {
+                Header: "ID",
+                accessor: "id"
+            },
             {
                 Header: "Name",
                 accessor: "name"
             },
             {
-                Header: "Login",
-                accessor: "login"
+                Header: "Multiplier",
+                accessor: "multiplier"
             },
             {
-                Header: "Email",
-                accessor: "email"
-            },
-            {
-              //TODO: fix hours
-              Header: "Actual Hours, %",
-              accessor: "hour_percentage",
-              Cell: ({ value }) => (value < 60 ? <span style={{ color: '#EF476F' }}>{value}</span> : value < 80 ? <span style={{ color: '#FF914D' }}>{value}</span> : value)
-            },
-            {
-              Header: "Adjusted Hours, %",
-              accessor: "multiplied_hour_percentage",
-              Cell: ({ value }) => (value < 60 ? <span style={{ color: '#EF476F' }}>{value}</span> : value < 80 ? <span style={{ color: '#FF914D' }}>{value}</span> : value)
-            },
-            {
-              Header: "Meetings, %",
-              accessor: "attendee_count"
-            },
-            {
-              Header: "Hours",
-              accessor: "total_hours"
-            }
+                Header: "Actions",
+                Cell: ({ cell }) => (
+                  <div>
+                    <button className="actionbutton" value={cell.row.values.id} onClick={ () =>  navigate(`/meetingtype/${cell.row.values.id}`)}>
+                      Edit
+                    </button>
+                  </div>
+                )
+            }            
             ]
         }],
         []
@@ -60,8 +56,8 @@ export default function ReportUserTable({ data }) {
       getTableProps,
       getTableBodyProps,
       headerGroups,
-      setFilter,
       prepareRow,
+      setFilter,
       page, // Instead of using 'rows', we'll use page,
       // which has only the rows for the active page
   
@@ -91,11 +87,8 @@ export default function ReportUserTable({ data }) {
         <input
           value={filterInput}
           onChange={handleFilterChange}
-          placeholder={"Search by name"}
+          placeholder={"Search by date"}
         />
-        <div>
-
-        </div>
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (

@@ -1,7 +1,9 @@
 import React from 'react';
 import MeetingTable from '../components/MeetingTable';
 import StartMeeting from '../components/StartMeeting';
+import MeetingTypesButton from '../components/MeetingTypesButton';
 import { getMeetings } from '../API';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 class Meetings extends React.Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class Meetings extends React.Component {
     this.state = {
       meetingData: [],
       IsApiError: false
-    } 
+    }
+    
   }
 
   componentDidMount() {
@@ -39,7 +42,10 @@ class Meetings extends React.Component {
             <div className='panel'>
             <p>Type in a date to find a meeting:</p>
             <MeetingTable data={this.state.meetingData} />
-            <StartMeeting />    
+            <StartMeeting />
+            {/* button to navigate to meeting tables */}
+            <MeetingTypesButton />
+
             </div>
         </div>
     );

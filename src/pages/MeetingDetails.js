@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import AttendeeTable from '../components/AttendeeTable';
-import { closeMeeting, getAttendees, getMeeting, changeMeetingType } from '../API';
+import { closeMeeting, getAttendees, getMeeting, getMeetingTypes, changeMeetingType } from '../API';
 import { getToken } from '../App';
 
 function KioskLauncher(props) {
@@ -45,28 +45,19 @@ function CloseButton(props) {
           navigate(`/meetings`);
         }}>Close Meeting</button>
         <p>Clicking on the "Close Meeting" button will end the meeting and automatically check-out all attendees. Make sure that all attending members have checked-in as this operation cannot be undone! </p>
-
-        {/*button toggle for optional or required meetings
-        changes the text and class of the button*/}
-        <button className="normalbutton" onClick={() => {
-          changeMeetingType({
-            meetingId: props.data.id,
-            token: getToken()
-          });
-          handleOptional();
-        }}>{optional ? "This Meeting Is Required" : "This Meeting Is Optional"} </button>
       </div>
     );
   }
   return <></>;
 }
 
-
 export default function MeetingDetails() {
   let { meetingId } = useParams();
 
   const [meetingData, setMeetingData] = useState({});
   const [attendeeData, setAttendeeData] = useState([]);
+  const [meetingTypes, setMeetingTypes] = useState([]);
+  const [meetingType, setMeetingType] = useState();
 
   const navigate = useNavigate();
 
@@ -79,12 +70,53 @@ export default function MeetingDetails() {
   }, [meetingId]);
 
   useEffect(() => {
+    console.log('use effect called to fetch meeting data');
     const fetchMeetingData = async () => {
       const data = await getMeeting(meetingId);
       setMeetingData(data);
     }
     fetchMeetingData();
-  }, [meetingId]);
+  }, [meetingId, meetingType]);
+
+  useEffect(() => {
+    const fetchMeetingTypes = async () => {
+      const data = await getMeetingTypes();
+      setMeetingTypes(data);
+    }
+    fetchMeetingTypes();
+  }, []);
+
+  function MeetingTypeSwitcher(props) {
+    if (props.data.closetime === "") {
+      return (
+        <div className="entry-field"> 
+        <label className="form-label">Type:</label>
+        {/* onchange change meeting type in meetingData */}
+        {/* parse meetingTypes array for name of first meeting type as default value */}
+        <select className="form-select" name="meetingtype" value={meetingData.meetingtype} onChange={
+          (event) => {
+            console.log("here");
+            console.log("meeting type: " + event.target.value);
+
+            changeMeetingType({
+              meetingId: meetingId,
+              meetingTypeId: event.target.value,
+              token: getToken()
+            });
+            // ).then(() => {
+            //   setMeetingType(event.target.value);
+            // });
+          }
+        }>
+          {/* for each meeting type, make dropdown selector with meetingTypes.name as the name and meetingTypes.id as the value. onchange run changeMeetingType */}
+          {meetingTypes.map((type) => (
+            <option key={type.id} value={type.id}>{type.name}</option>
+          ))}
+        </select>
+        </div>
+      );
+    }
+  }
 
   return (
     <div className="main">
@@ -102,9 +134,36 @@ export default function MeetingDetails() {
                 navigate(`/meeting/${meetingData.prev_meeting_id}`);
             }}>Prev</button></p>
           <p>Meeting Status: {meetingData.closetime === "" ? "Open" : "Closed"}</p>
-          <p>Meeting Type: {meetingData.type === "1" ? "Optional" : "Required"}</p>
+          <p>Meeting Type Id: {meetingData.meetingtype}</p>
+          <p>Meeting Type: {meetingData.type}</p>
           <KioskLauncher data={meetingData} />
           <CloseButton data={meetingData} />
+          <div className="entry-field"> 
+            <label className="form-label">Change Type:</label>
+            {/* onchange change meeting type in meetingData */}
+            {/* parse meetingTypes array for name of first meeting type as default value */}
+            <select className="form-select" name="meetingtype" defaultValue={meetingData?.meetingType} onChange={
+              (event) => {
+                console.log("here");
+                console.log("meeting type before: " + meetingData.meetingtype);
+                console.log("setting meeting type: " + event.target.value);
+                changeMeetingType({
+                  meetingId: meetingId,
+                  meetingTypeId: event.target.value,
+                  token: getToken()
+                }).then(() => {
+                  setMeetingType(event.target.value);
+                });
+              }
+            }>
+              <option key="0" value="0">-- Select Meeting Type --</option>
+              {/* for each meeting type, make dropdown selector with meetingTypes.name as the name and meetingTypes.id as the value. onchange run changeMeetingType */}
+              {meetingTypes.map((type) => (
+                <option key={type.id} value={type.id}>{type.name}</option>
+              ))}
+            </select>
+          </div>
+        
         </div>
 
         <div className="panel">

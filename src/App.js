@@ -18,6 +18,8 @@ import UserView from './pages/UserView';
 import ViewAttendanceForm from './pages/ViewAttendanceForm';
 import RegisterOrganization from './pages/RegisterOrganization';
 import ResetPassword from './pages/ResetPassword';
+import MeetingTypes from './pages/MeetingTypes';
+import MeetingTypeDetails from './pages/MeetingTypeDetails';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -99,6 +101,12 @@ export default function App() {
               <MeetingDetails />
             </RequireAdmin>
           } />
+          <Route path="/meetingtype/:meetingTypeId" element = {
+            <RequireAdmin>
+              <Navbar />
+              <MeetingTypeDetails />
+            </RequireAdmin>
+          } />
           <Route path="/user/:userId" element = {
             <RequireAdmin>
               <Navbar />
@@ -127,6 +135,12 @@ export default function App() {
             <RequireAdmin>
               <Navbar />
               <Meetings />
+            </RequireAdmin>
+          } />
+          <Route path="/meetingtypes" element={
+            <RequireAdmin>
+              <Navbar />
+              <MeetingTypes />
             </RequireAdmin>
           } />
         </Routes>

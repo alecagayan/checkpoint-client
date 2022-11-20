@@ -51,6 +51,14 @@ export async function getMeetings() {
     return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/meetings')
 }
 
+export async function getMeetingTypes() {
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/meetingtypes')
+}   
+
+export async function getMeetingsWithType(meetingTypeId) {
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/meetingswithtype?meetingTypeId=' + meetingTypeId)
+}
+
 export async function getRecentMeetings(limit) {
     return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/recentmeetings?limit=' + limit)
 }
@@ -61,6 +69,10 @@ export async function startMeeting(meetingData) {
 
 export async function getMeeting(meetingId) {
     return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/meeting?meetingId=' + meetingId)
+}
+
+export async function getMeetingType(meetingTypeId) {
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/meetingtype?meetingTypeId=' + meetingTypeId)
 }
 
 export async function closeMeeting(meetingData) {
@@ -107,6 +119,10 @@ export async function addUser(userData) {
 
 export async function updateUser(userData) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/updateuser', userData)
+}
+
+export async function updateMeetingType(meetingTypeData) {
+    return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/updatemeetingtype', meetingTypeData)
 }
 
 export async function getUsers() {

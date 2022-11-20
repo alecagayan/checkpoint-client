@@ -178,6 +178,24 @@ html{
 
 }
 
+.checkinbutton {
+  border-radius: 25px;
+  height: 30px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 600;
+  background: #06D6A0;
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  margin-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: 'ibm plex sans', sans-serif;
+
+}
+
+
 
 .signupbutton {
   display: flex;
