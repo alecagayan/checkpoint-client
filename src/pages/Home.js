@@ -152,7 +152,7 @@ class Home extends React.Component {
         <BarChart chartData={this.state.attendeeMeetingData} />
         </div>
         <div className='chart'>
-          <p>Top attendees by hour:</p>
+          <p>Top attendees by hour (beta):</p>
         <BarChart chartData={this.state.attendeeHourData} />
         </div>
         </div>
