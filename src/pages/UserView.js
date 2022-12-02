@@ -157,7 +157,7 @@ export default function UserView() {
             <div className="entry-field">
                 <label className="form-label">Percentage:</label>
                 {/* text is yellow if below 80 and red if below 60 */}
-                <input className="form-input" type="text" name="percentage" value={percentageData} disabled="disabled" style={{color: percentageData < 60 ? 'red' : percentageData < 80 ? 'yellow' : 'green'}} />
+                <input className="form-input" type="text" name="percentage" value={percentageData} disabled="disabled" style={{color: percentageData < 60 ? '#EF476F' : percentageData < 80 ? '#FF914D' : 'green'}} />
             </div>
             </form>
                 <AttendanceTable data={attendanceData} />
