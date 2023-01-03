@@ -28,6 +28,20 @@ class Report extends React.Component {
 
     this.onChange = this.onChange.bind(this);
 
+        if(start && this.state.endDate) {
+      getReportByDate(start, this.state.endDate)
+        .then(
+            (result) => {
+                this.setState({
+                    userData: result
+                });
+              }, 
+            (error) => {
+                this.setState({ IsApiError: true });
+            }  
+        )
+          }
+
   }
 
   
@@ -44,7 +58,7 @@ class Report extends React.Component {
                     userData: result
                 });
               }, 
-            (error) => {
+            (error) => {  
                 this.setState({ IsApiError: true });
             }  
         )

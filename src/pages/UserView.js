@@ -67,56 +67,56 @@ export default function UserView() {
         }
       };
 
-    const handleSubmit = async e => {
-        e.preventDefault();
+    // const handleSubmit = async e => {
+    //     e.preventDefault();
 
-        const result = await updateUser({
-            id: userData.id,
-            name: userData.name,
-            email: userData.email,
-            username: userData.username,
-            login: userData.login,
-            role: userData.role,
-            status: userData.status,
-            token: getToken()
-        });
+    //     const result = await updateUser({
+    //         id: userData.id,
+    //         name: userData.name,
+    //         email: userData.email,
+    //         username: userData.username,
+    //         login: userData.login,
+    //         role: userData.role,
+    //         status: userData.status,
+    //         token: getToken()
+    //     });
 
-        if (result.user) {
-            // show success toast
-            showToast('success', 'User updated successfully.');
-        } else {
-            // show error toast
-            showToast('error', 'Failed to update user.');
-        }
-    }
+    //     if (result.user) {
+    //         // show success toast
+    //         showToast('success', 'User updated successfully.');
+    //     } else {
+    //         // show error toast
+    //         showToast('error', 'Failed to update user.');
+    //     }
+    // }
 
-    const handleChange = (event) => {
-        setUserData({ ...userData, [event.target.name]: event.target.value });
-    };
+    // const handleChange = (event) => {
+    //     setUserData({ ...userData, [event.target.name]: event.target.value });
+    // };
 
-    const showToast = (type, msg) => {
-        switch (type) {
-            case 'success':
-                toastProperties = {
-                    id: toastList.length + 1,
-                    title: 'Success',
-                    description: msg,
-                    backgroundColor: '#0066ff'
-                }
-                break;
-            case 'error':
-                toastProperties = {
-                    id: toastList.length + 1,
-                    title: 'Error',
-                    description: msg,
-                    backgroundColor: '#d9534f'
-                }
-                break;
-            default:
-                toastProperties = [];
-        }
-        setToastList([...toastList, toastProperties]);
-    };
+    // const showToast = (type, msg) => {
+    //     switch (type) {
+    //         case 'success':
+    //             toastProperties = {
+    //                 id: toastList.length + 1,
+    //                 title: 'Success',
+    //                 description: msg,
+    //                 backgroundColor: '#0066ff'
+    //             }
+    //             break;
+    //         case 'error':
+    //             toastProperties = {
+    //                 id: toastList.length + 1,
+    //                 title: 'Error',
+    //                 description: msg,
+    //                 backgroundColor: '#d9534f'
+    //             }
+    //             break;
+    //         default:
+    //             toastProperties = [];
+    //     }
+    //     setToastList([...toastList, toastProperties]);
+    // };
 
 
     return (

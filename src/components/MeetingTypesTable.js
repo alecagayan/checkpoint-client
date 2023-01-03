@@ -27,15 +27,19 @@ export default function MeetingTypesTable({ data }) {
             columns: [
             {
                 Header: "ID",
-                accessor: "id"
+                accessor: "id",
+                sortType: "basic"
+
             },
             {
                 Header: "Name",
-                accessor: "name"
+                accessor: "name",
+                sortType: "basic"
             },
             {
                 Header: "Multiplier",
-                accessor: "multiplier"
+                accessor: "multiplier",
+                sortType: "basic"
             },
             {
                 Header: "Actions",
@@ -78,7 +82,8 @@ export default function MeetingTypesTable({ data }) {
         initialState: { pageIndex: 0 },
       },
       useFilters,
-      usePagination
+      useSortBy,
+      usePagination,
     )
   
     // Render the UI for your table
@@ -94,7 +99,12 @@ export default function MeetingTypesTable({ data }) {
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}
+                    <span>
+                      {column.isSorted ? (column.isSortedDesc ? ' ↑' : ' ↓') : ''}
+                    </span>
+                  </th>
                 ))}
               </tr>
             ))}
@@ -153,7 +163,7 @@ export default function MeetingTypesTable({ data }) {
               setPageSize(Number(e.target.value))
             }}
           >
-            {[10, 20, 30, 40, 50].map(pageSize => (
+          {[10, 20, 30, 40, 50, 1000].map(pageSize => (
               <option key={pageSize} value={pageSize}>
                 Show {pageSize}
               </option>

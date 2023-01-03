@@ -1,5 +1,6 @@
 import React from 'react';
 import MeetingTypesTable from '../components/MeetingTypesTable';
+import AddMeetingType from '../components/AddMeetingType';
 import { getMeetingTypes } from '../API';
 
 class MeetingTypes extends React.Component {
@@ -37,7 +38,7 @@ class MeetingTypes extends React.Component {
             <p>All of the meeting types in your organization.</p>
             <div className='panel'>
             <MeetingTypesTable data={this.state.meetingTypesData} />
-            {/* <NewMeetingType /> */}
+            <AddMeetingType />
 
             </div>
         </div>

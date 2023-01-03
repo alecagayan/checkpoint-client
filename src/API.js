@@ -121,6 +121,10 @@ export async function updateUser(userData) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/updateuser', userData)
 }
 
+export async function addMeetingType(userData) {
+    return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/addmeetingtype', userData)
+}
+
 export async function updateMeetingType(meetingTypeData) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/updatemeetingtype', meetingTypeData)
 }

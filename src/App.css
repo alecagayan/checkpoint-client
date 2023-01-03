@@ -91,7 +91,7 @@ table th.sort-desc::before {
 } 
 
 .chart-container {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
 }
 

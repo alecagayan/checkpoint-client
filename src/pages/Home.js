@@ -139,9 +139,12 @@ class Home extends React.Component {
   render() {
 
     return (
-      <div className='main'>
+      // div with max width of 100% and overflow hidden
+      <div className='main' style={ { maxWidth: '100%', overflow: 'hidden' } }>
+      {/* <div className='main' > */}
         <h2>Home</h2>
         <p>Welcome to Checkpoint!</p>
+        {/* chart container div with overflow hidden */}
         <div className='chart-container'>
         <div className='chart'>
           <p>Recent meeting attendance:</p>
@@ -151,13 +154,15 @@ class Home extends React.Component {
           <p>Top attendees by meeting:</p>
         <BarChart chartData={this.state.attendeeMeetingData} />
         </div>
-        <div className='chart'>
+        {/* <div className='chart'>
           <p>Top attendees by hour (beta):</p>
         <BarChart chartData={this.state.attendeeHourData} />
+        </div> */}
+        {/* <div data-tf-popover="HdgwAzhi" data-tf-button-color="#0445AF" data-tf-chat data-tf-medium="snippet" style={{ all: 'unset' }}></div><script src="//embed.typeform.com/next/embed.js"></script> */}
+
         </div>
-        </div>
-      </div>
-      
+
+      </div>      
     );
   }
 }

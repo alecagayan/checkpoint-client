@@ -142,11 +142,8 @@ export default function MeetingDetails() {
             <label className="form-label">Change Type:</label>
             {/* onchange change meeting type in meetingData */}
             {/* parse meetingTypes array for name of first meeting type as default value */}
-            <select className="form-select" name="meetingtype" defaultValue={meetingData?.meetingType} onChange={
+            <select className="form-select" name="meetingtype" value={meetingData.meetingtype} onChange={
               (event) => {
-                console.log("here");
-                console.log("meeting type before: " + meetingData.meetingtype);
-                console.log("setting meeting type: " + event.target.value);
                 changeMeetingType({
                   meetingId: meetingId,
                   meetingTypeId: event.target.value,

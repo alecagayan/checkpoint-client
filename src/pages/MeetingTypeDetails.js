@@ -96,7 +96,7 @@ export default function MeetingTypeDetails() {
                         </div>
                         <div className="entry-field">
                             <label className="form-label">Multiplier:</label>
-                            <input className="form-input" type="text" name="email" value={meetingTypeData.multiplier} onChange={handleChange} />
+                            <input className="form-input" type="text" name="multiplier" value={meetingTypeData.multiplier} onChange={handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
