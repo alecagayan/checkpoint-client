@@ -1,70 +1,17 @@
-# Getting Started with Create React App
+# Checkpoint Attendance
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Checkpoint, the attendance web app designed specifically for teams of all sizes. With Checkpoint, you'll be able to keep track of attendance at all your team meetings, competitions, and events in one easy-to-use platform.
 
-## Available Scripts
+Gone are the days of cumbersome paper sign-in sheets or spreadsheet tracking. Simply have each member check in with a few clicks on a computer at the beginning of the meeting.
 
-In the project directory, you can run:
+Not only does Checkpoint save you time and hassle, it also helps you stay organized and on top of team participation. You can view attendance records in real time, ensuring that everyone is accounted for and that no one falls through the cracks.
 
-### `npm start`
+![Real-time insights](https://imagen.click/i/d331ec.png)
+*Collect real-time insights with Checkpoint*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+And with Checkpoint, you'll not only be able to easily track attendance, but you'll also have access to real-time metrics and insights that can help you understand the patterns and trends in your team's attendance. You can see which meetings and events have had the highest attendance, and which ones may have struggled to attract members. This information can be incredibly valuable for team leaders looking to improve participation and engagement.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Valuable metrics](https://imagen.click/i/33b4f8.png)
+*View metrics and set goals*
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Additionally, Checkpoint allows you to set custom attendance goals for your team and track your progress towards meeting them. This can be a great motivator for team members and can help foster a sense of accountability and responsibility within your team.
