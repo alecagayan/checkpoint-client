@@ -17,6 +17,7 @@ import {
 import { BarChart }  from '../components/charts/BarChart';
 import { LineChart } from '../components/charts/LineChart';
 import { getRecentMeetings, getReportByDate, getTopAttendees } from '../API';
+import { IfAdminRole } from '../App';
 
 Chart.register(
   Legend,
@@ -144,6 +145,7 @@ class Home extends React.Component {
       {/* <div className='main' > */}
         <h2>Home</h2>
         <p>Welcome to Checkpoint!</p>
+        <IfAdminRole>
         {/* chart container div with overflow hidden */}
         <div className='chart-container'>
         <div className='chart'>
@@ -159,9 +161,8 @@ class Home extends React.Component {
         <BarChart chartData={this.state.attendeeHourData} />
         </div> */}
         {/* <div data-tf-popover="HdgwAzhi" data-tf-button-color="#0445AF" data-tf-chat data-tf-medium="snippet" style={{ all: 'unset' }}></div><script src="//embed.typeform.com/next/embed.js"></script> */}
-
         </div>
-
+        </IfAdminRole>
       </div>      
     );
   }

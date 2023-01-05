@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IfAdminRole } from '../../App';
 import {
 	Nav,
 	NavLink,
@@ -28,14 +29,19 @@ const Navbar = () => {
 					<NavLink to='/'>
 						Home
 					</NavLink>
-					<NavLink to='/users'>
-						Users
-					</NavLink>
+					<IfAdminRole>
+						<NavLink to='/users'>
+							Users
+						</NavLink>
 					<NavLink to='/meetings'>
 						Meetings
 					</NavLink>
 					<NavLink to='/report'>
 						Report
+					</NavLink>
+					</IfAdminRole>
+					<NavLink to='/profile'>
+						My Profile
 					</NavLink>
 				</NavMenu>
 				<NavBtn>

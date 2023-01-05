@@ -5,7 +5,7 @@ import { loginUser } from '../API';
 import Toast from '../components/toast/Toast';
 
 
-export default function LoginForm ({setToken, setOrg}) {
+export default function LoginForm ({setToken, setRole}) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
@@ -15,13 +15,15 @@ export default function LoginForm ({setToken, setOrg}) {
     
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
+        const result = await loginUser({
           username,
           password
         });
-        if (token.token) {
-          setToken(token);
-            navigate("/");
+        if (result.token) {
+          setToken({ token: result.token });
+          setRole({ role: result.role });
+          navigate("/");
+
         } else {
             showToast('error');
         }
@@ -45,7 +47,7 @@ export default function LoginForm ({setToken, setOrg}) {
 
     return(
     <div id="form">
-        <h2 id="headerTitle">Admin Login</h2>
+        <h2 id="headerTitle">Login</h2>
         <form onSubmit={handleSubmit}>
         <div>      
              <div className="row">

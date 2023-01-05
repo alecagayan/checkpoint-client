@@ -1,37 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import AttendanceTable from '../components/AttendanceTable';
-import { getUser, getAttendance, updateUser, forgotPassword } from '../API';
+import { getUser, getAttendance, updateUser, getUserByToken } from '../API';
 import { getToken } from '../App';
 import Toast from '../components/toast/Toast';
 
 
-export default function UserDetails() {
-  let { userId } = useParams();
-
+export default function Profile() {
   const [userData, setUserData] = useState({});
   const [attendanceData, setAttendanceData] = useState([]);
 
   const [toastList, setToastList] = useState([]);
   let toastProperties = null;
 
-
   useEffect(() => {
     const fetchUserData = async () => {
-      const data = await getUser(userId);
+      const data = await getUserByToken();
       console.log("data", data);
       setUserData(data);
     };
     fetchUserData();
-  }, []);
-
-  useEffect(() => {
-    const fetchAttendanceData = async () => {
-      const data = await getAttendance(userId);
-      console.log("data", data);
-      setAttendanceData(data);
-    }
-    fetchAttendanceData();
   }, []);
 
   const handleSubmit = async e => {
@@ -61,18 +49,6 @@ export default function UserDetails() {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
 
-  const handleForgotPassword = async e => {
-    const result = await forgotPassword({
-      email: userData.email
-    });
-    if (result.result === "1") {
-        showToast('success', 'Password reset email sent to ' + userData.email + '.');
-    } else {
-        showToast('error', 'Failed to send password reset email to ' + userData.email + '.');
-    }
-
-}
-
   const showToast = (type, msg) => {
     switch (type) {
       case 'success':
@@ -100,9 +76,9 @@ export default function UserDetails() {
 
   return (
     <div className="main">
-      <h2>User Details</h2>
+      <h2>Your Details</h2>
       <div className="panel">
-        <p>User ID: {userId}</p>
+        <p>User ID: {userData.id}</p>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -120,14 +96,14 @@ export default function UserDetails() {
             </div>
             <div className="entry-field">
               <label className="form-label">Role:</label>
-              <select className="form-select" name="role" value={userData.role} onChange={handleChange}>
+              <select className="form-select" name="role" value={userData.role} disabled="true" onChange={handleChange}>
                 <option value="0">Member</option>
                 <option value="1">Admin</option>
               </select>
             </div>
             <div className="entry-field">
               <label className="form-label">Status:</label>
-              <select className="form-select" name="status" value={userData.status} onChange={handleChange}>
+              <select className="form-select" name="status" value={userData.status} disabled="true" onChange={handleChange}>
                 <option value="1">Active</option>
                 <option value="0">Disabled</option>
               </select>
@@ -135,16 +111,12 @@ export default function UserDetails() {
           </div>
           <div className="form-group">
             <br />
-            <button className='normalbutton'>Update User</button>
+            <button className='normalbutton'>Update</button>
 
-            <button className="normalbutton" type='button' onClick={() => {handleForgotPassword();}}>Reset Password</button>
           </div>
 
         </form>
 
-      </div>
-      <div className="panel">
-        <AttendanceTable data={attendanceData} />
       </div>
       <Toast toastlist={toastList} position="top-right" setList={setToastList} />
     </div>

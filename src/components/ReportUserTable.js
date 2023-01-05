@@ -37,7 +37,7 @@ export default function ReportUserTable({ data }) {
           },
           {
             //TODO: fix hours
-            Header: "Actual Hours, %",
+            Header: "Hours, %",
             accessor: "hour_percentage",
             sortType: "alphanumeric",
             Cell: ({ value }) => (value < 60 ? <span style={{ color: '#EF476F' }}>{value}</span> : value < 80 ? <span style={{ color: '#FF914D' }}>{value}</span> : value)

@@ -113,6 +113,10 @@ export async function getUserByLogin(login) {
     return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/userbylogin?login=' + login)
 }
 
+export async function getUserByToken() {
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/userbytoken')
+}
+
 export async function addUser(userData) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/adduser', userData)
 }

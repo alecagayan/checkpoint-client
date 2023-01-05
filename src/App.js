@@ -20,16 +20,27 @@ import RegisterOrganization from './pages/RegisterOrganization';
 import ResetPassword from './pages/ResetPassword';
 import MeetingTypes from './pages/MeetingTypes';
 import MeetingTypeDetails from './pages/MeetingTypeDetails';
+import Profile from './pages/Profile';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
   sessionStorage.removeItem('kiosk');
 }
 
+function setRole(userRole) {
+  sessionStorage.setItem('role', JSON.stringify(userRole));
+}
+
 export function getToken() {
   const tokenString = sessionStorage.getItem('token');
   const userToken = JSON.parse(tokenString);
   return userToken?.token
+}
+
+export function getRole() {
+  const roleString = sessionStorage.getItem('role');
+  const userRole = JSON.parse(roleString);
+  return userRole?.role
 }
 
 export function isKiosk() {
@@ -49,6 +60,11 @@ function RequireAdmin({ children }) {
   return (token && !isKiosk()) ? children : <Navigate to="/login" replace />;
 }
 
+export function IfAdminRole({ children }) {
+  const role = getRole();
+  return (role === "admin") ? children : <></>;
+}
+
 
 export default function App() {
   useEffect(() => {
@@ -65,7 +81,7 @@ export default function App() {
             </RequireAdmin>
           } />
           <Route path="/login" element = {
-            <LoginForm setToken={setToken} />
+            <LoginForm setToken={setToken} setRole={setRole} />
             } />
           <Route path="/signup" element = {
             <SignupForm />
@@ -112,6 +128,12 @@ export default function App() {
               <Navbar />
               <UserDetails />
             </RequireAdmin>
+          } />
+          <Route path="/profile" element = {
+            <RequireAuth>
+              <Navbar />
+              <Profile />
+            </RequireAuth>
           } />
           <Route path="/report" element={
             <RequireAdmin>
