@@ -91,6 +91,10 @@ export async function getAttendance(userId) {
     return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/attendance?userId=' + userId)
 }
 
+export async function getAttendanceByToken() {
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/attendancebytoken')
+}
+
 export async function getAttendanceBetweenDates(userId, startDate, endDate) {
     let startDateStr = startDate.toISOString().substring(0, 10);
     let endDateStr = endDate.toISOString().substring(0, 10);
@@ -98,11 +102,22 @@ export async function getAttendanceBetweenDates(userId, startDate, endDate) {
         .then(data => data.json())
 }
 
+export async function getAttendanceByTokenBetweenDates(startDate, endDate) {
+    let startDateStr = startDate.toISOString().substring(0, 10);
+    let endDateStr = endDate.toISOString().substring(0, 10);
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/attendancebytokenbetweendates?startDate=' + startDateStr + '&endDate=' + endDateStr)
+}
 export async function getPercentages(userId, startDate, endDate) {
     let startDateStr = startDate.toISOString().substring(0, 10);
     let endDateStr = endDate.toISOString().substring(0, 10);
     return fetch(process.env.REACT_APP_API_URL + '/rbapi/percentages?userId=' + userId + '&startDate=' + startDateStr + '&endDate=' + endDateStr)
         .then(data => data.json())
+}
+
+export async function getPercentagesByTokenBetweenDates(startDate, endDate) {
+    let startDateStr = startDate.toISOString().substring(0, 10);
+    let endDateStr = endDate.toISOString().substring(0, 10);
+    return getWithToken(process.env.REACT_APP_API_URL + '/rbapi/percentagesbytokenbetweendates?startDate=' + startDateStr + '&endDate=' + endDateStr)
 }
 
 export async function getUser(userId) {

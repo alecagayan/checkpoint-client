@@ -65,6 +65,11 @@ export function IfAdminRole({ children }) {
   return (role === "admin") ? children : <></>;
 }
 
+export function IfUserRole({ children }) {
+  const role = getRole();
+  return (role === "user") ? children : <></>;
+}
+
 
 export default function App() {
   useEffect(() => {

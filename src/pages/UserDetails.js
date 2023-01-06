@@ -147,6 +147,6 @@ export default function UserDetails() {
         <AttendanceTable data={attendanceData} />
       </div>
       <Toast toastlist={toastList} position="top-right" setList={setToastList} />
-    </div>
+    </div>  
   );
 }

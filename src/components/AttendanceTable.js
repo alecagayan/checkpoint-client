@@ -17,7 +17,7 @@ export default function AttendanceTable({ data }) {
     () => [
       {
         // first group - TV Show
-        Header: "Attendance",
+        Header: "Your Attendance",
         // First group columns
         columns: [
           {

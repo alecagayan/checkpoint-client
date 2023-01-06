@@ -47,17 +47,6 @@ class AddUser extends React.Component {
         alert("Login must be at least 3 characters");
         return;
       }
-      // validate password matches password confirmation
-      if (this.state.userRole == "1") {
-        if (this.state.userPassword == "") {
-          alert("Password cannot be empty!");
-          return;
-        }
-        if (this.state.userPassword !== this.state.userPasswordConfirm) {
-          alert("Password and Password Confirmation do not match!");
-          return;
-        }
-      }
 
       const result = await addUser({
         name: this.state.userName,
@@ -65,7 +54,6 @@ class AddUser extends React.Component {
         username: this.state.userLogin, 
         role: this.state.userRole,
         status: this.state.userStatus,
-        password: this.state.userPassword,
         token: getToken()       
       });
 
@@ -130,17 +118,6 @@ class AddUser extends React.Component {
                     <option value="0">Member</option>
                     <option value="1">Admin</option>
                   </select>
-                </div>
-                <div className="form-row">
-                  <p>Password is required for Admin role only.</p>
-                <label className="form-label">
-                    Password:</label>
-                    <input className="form-input" type="password" name="userPassword" value={this.state.userPassword} onChange={this.handleChange.bind(this)}/>
-                </div>
-                <div className="form-row">
-                <label className="form-label">
-                    Confirm password:</label>
-                    <input className="form-input" type="password" name="userPasswordConfirm" value={this.state.userPasswordConfirm} onChange={this.handleChange.bind(this)}/>
                 </div>
                 <br/>
             </form>

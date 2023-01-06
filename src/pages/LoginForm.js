@@ -61,7 +61,6 @@ export default function LoginForm ({setToken, setRole}) {
             <div id="button" className="row">
                 <button>Log In</button>
             </div> 
-            <a href="/view" className='signupbutton' >Not an admin? View your attendance</a>
             <a href="/forgot" className='adminbutton' >Forgot Password</a>
 
         </div>

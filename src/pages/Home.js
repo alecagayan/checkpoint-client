@@ -16,8 +16,12 @@ import {
 
 import { BarChart }  from '../components/charts/BarChart';
 import { LineChart } from '../components/charts/LineChart';
-import { getRecentMeetings, getReportByDate, getTopAttendees } from '../API';
-import { IfAdminRole } from '../App';
+import AttendanceTable from '../components/AttendanceTable';  
+import { getRecentMeetings, getAttendanceByTokenBetweenDates, getPercentagesByTokenBetweenDates, getTopAttendees } from '../API';
+import { IfAdminRole, IfUserRole } from '../App';
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 Chart.register(
   Legend,
@@ -34,14 +38,50 @@ Chart.register(
 
 class Home extends React.Component {
   constructor(props) {
+
+    const start = new Date();
+    start.setDate(start.getDate()-30);
     super(props);
 
     this.state = {
       meetingData: {},
       attendeeMeetingData: {},
       attendeeHourData: {},
-      IsApiError: false
+      attendanceData: [],
+      percentageData: [],
+      IsApiError: false,
+      startDate: start,
+      endDate: new Date()
     }
+
+    this.onChange = this.onChange.bind(this);
+
+    if (start && this.state.endDate) {
+      getAttendanceByTokenBetweenDates(start, this.state.endDate)
+        .then(
+          (result) => {
+            this.setState({
+              attendanceData: result
+            });
+          },
+          (error) => {
+            this.setState({ IsApiError: true });
+          }
+        )
+
+      getPercentagesByTokenBetweenDates(start, this.state.endDate)
+        .then(
+          (result) => {
+            this.setState({
+              percentageData: result
+            });
+          },
+          (error) => {
+            this.setState({ IsApiError: true });
+          }
+        )
+    }
+
 
   }
 
@@ -136,6 +176,37 @@ class Home extends React.Component {
 
   }
 
+  onChange = (dates) => {
+    const [start, end] = dates;
+    this.setState({startDate: start});
+    this.setState({endDate: end});
+
+    if (start && end) {
+      getAttendanceByTokenBetweenDates(start, end)
+          .then(
+            (result) => {
+              this.setState({
+                  attendanceData: result
+              });
+            }, 
+          (error) => {  
+              this.setState({ IsApiError: true });
+          }  
+          )
+      getPercentagesByTokenBetweenDates(start, end)
+          .then(
+            (result) => {
+              this.setState({
+                  percentageData: result
+              });
+            }, 
+          (error) => {  
+              this.setState({ IsApiError: true });
+          }  
+          )
+  }
+  }
+
 
   render() {
 
@@ -144,7 +215,7 @@ class Home extends React.Component {
       <div className='main' style={ { maxWidth: '100%', overflow: 'hidden' } }>
       {/* <div className='main' > */}
         <h2>Home</h2>
-        <p>Welcome to Checkpoint!</p>
+        <p>Welcome to Checkpoint! <IfUserRole>View your attendance below.</IfUserRole></p>
         <IfAdminRole>
         {/* chart container div with overflow hidden */}
         <div className='chart-container'>
@@ -163,6 +234,28 @@ class Home extends React.Component {
         {/* <div data-tf-popover="HdgwAzhi" data-tf-button-color="#0445AF" data-tf-chat data-tf-medium="snippet" style={{ all: 'unset' }}></div><script src="//embed.typeform.com/next/embed.js"></script> */}
         </div>
         </IfAdminRole>
+        <IfUserRole>
+        <div className="panel">
+        <div className='panel'>
+            Select a date range:
+            <DatePicker
+                selected={this.state.startDate}
+                onChange={this.onChange.bind(this)}
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                selectsRange
+
+            />
+                        <div className="entry-field">
+                <label className="">Adjusted percentage:</label>
+                {/* text is yellow if below 80 and red if below 60 */}
+                <input className="form-input" type="text" name="percentage" value={this.state.percentageData} disabled="disabled" style={{color: this.state.percentageData < 60 ? '#EF476F' : this.state.percentageData < 80 ? '#FF914D' : 'green'}} />
+            </div>
+                <AttendanceTable data={this.state.attendanceData} />
+            </div>
+        </div>
+        </IfUserRole>
+        
       </div>      
     );
   }
