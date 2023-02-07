@@ -6,7 +6,8 @@ import Toast from '../components/toast/Toast';
 
 export default function ResetPasswordForm () {
 
-    let { passwordResetToken } = useParams();
+    const queryParameters = new URLSearchParams(window.location.search)
+    let passwordResetToken = queryParameters.get('token');
 
     const [password, setPassword] = useState();
     const [repeatPassword, setRepeatPassword] = useState();

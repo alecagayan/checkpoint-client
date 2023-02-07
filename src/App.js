@@ -21,6 +21,7 @@ import ResetPassword from './pages/ResetPassword';
 import MeetingTypes from './pages/MeetingTypes';
 import MeetingTypeDetails from './pages/MeetingTypeDetails';
 import Profile from './pages/Profile';
+import QRScannerCheckin from './pages/QRScannerCheckin';
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -103,12 +104,17 @@ export default function App() {
           <Route path="/neworg" element = {
               <RegisterOrganization />
           } />
-          <Route path="/resetpassword/:passwordResetToken" element = {
+          <Route path="/resetpassword" element = {
               <ResetPassword />
           } />
           <Route path="/checkin/:meetingId" element = {
             <RequireAuth>
               <CheckinForm />
+            </RequireAuth>
+          } />
+          <Route path="/qrcheckin/:meetingId" element = {
+            <RequireAuth>
+              <QRScannerCheckin />
             </RequireAuth>
           } />
           <Route path="/checkout/:meetingId" element = {

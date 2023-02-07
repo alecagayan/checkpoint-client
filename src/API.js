@@ -156,6 +156,10 @@ export async function checkinUser(checkinDetails) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/checkin', checkinDetails)
 }
 
+export async function checkinByUserToken(checkinDetails) {
+    return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/checkinbyusertoken', checkinDetails)
+}
+
 export async function checkoutUser(checkoutDetails) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/checkout', checkoutDetails)
 }

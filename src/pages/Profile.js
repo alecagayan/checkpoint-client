@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import QRCode from "react-qr-code";
+
 import AttendanceTable from '../components/AttendanceTable';
 import { getUser, getAttendance, updateUser, getUserByToken } from '../API';
 import { getToken } from '../App';
@@ -118,6 +120,15 @@ export default function Profile() {
         </form>
 
       </div>
+      <div style={{ height: "auto", margin: "0 auto", maxWidth: 256, width: "100%" }}>
+      {userData.login && (
+          <QRCode
+            value={getToken()}
+            size={256}
+            
+          />
+        )}
+    </div>
       <Toast toastlist={toastList} position="top-right" setList={setToastList} />
     </div>
   );
