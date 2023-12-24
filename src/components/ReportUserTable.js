@@ -49,6 +49,12 @@ export default function ReportUserTable({ data }) {
             Cell: ({ value }) => (value < 60 ? <span style={{ color: '#EF476F' }}>{value}</span> : value < 80 ? <span style={{ color: '#FF914D' }}>{value}</span> : value)
           },
           {
+            Header: "IntelliScore",
+            accessor: "intelliscore",
+            sortType: "alphanumeric",
+            Cell: ({ value }) => (value < 60 ? <span style={{ color: '#EF476F' }}>{value}</span> : value < 80 ? <span style={{ color: '#FF914D' }}>{value}</span> : value)
+          },
+          {
             Header: "Meetings, %",
             accessor: "attendee_count",
             sortType: "alphanumeric"
