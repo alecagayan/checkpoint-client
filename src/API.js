@@ -79,6 +79,10 @@ export async function closeMeeting(meetingData) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/closemeeting', meetingData)
 }
 
+export async function deleteMeeting(meetingData) {
+    return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/deletemeeting', meetingData)
+}
+
 export async function changeMeetingType(meetingData) {
     return postWithToken(process.env.REACT_APP_API_URL + '/rbapi/changemeetingtype', meetingData)
 }

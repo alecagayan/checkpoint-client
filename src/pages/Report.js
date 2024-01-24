@@ -14,7 +14,7 @@ class Report extends React.Component {
   constructor(props) {
 
     const start = new Date();
-    start.setDate(start.getDate()-30);
+    start.setDate(start.getDate()-90);
     super(props);
 
     this.state = {

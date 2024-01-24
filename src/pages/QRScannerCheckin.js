@@ -6,6 +6,8 @@ import { getToken } from '../App';
 import { checkinUser, checkinByUserToken } from '../API';
 import QRCodeScanner from '../components/QRCodeScanner';
 import {QrScanner} from '@yudiel/react-qr-scanner';
+//import QRCodeScanner from 'react-native-qrcode-scanner';
+
 
 import '../index.css';
 
@@ -72,31 +74,32 @@ export default function QRScannerCheckin({ setToken }) {
             });
 
             if (response.result === "0") {
-                color = "#06d6a0";
+                showToast('success', 'User ' + studentId + ' checked in successfully.');
                 console.log(response.result)
-            } else {
-                color = "#ed4647";
             }
+            // else {
+            //     color = "#ed4647";
+            // }
 
-            document.getElementById("form").style.backgroundColor = color;
-            //turn all the text white
-            document.getElementById("headerTitle").style.color = "white";
-            document.getElementById("idlabel").style.color = "white";
-            document.getElementById("checkoutbutton").style.color = "white";
-            document.getElementById("signupbutton").style.color = "white";
-            document.getElementById("adminloginbutton").style.color = "white";
+            // document.getElementById("form").style.backgroundColor = color;
+            // //turn all the text white
+            // document.getElementById("headerTitle").style.color = "white";
+            // document.getElementById("idlabel").style.color = "white";
+            // document.getElementById("checkoutbutton").style.color = "white";
+            // document.getElementById("signupbutton").style.color = "white";
+            // document.getElementById("adminloginbutton").style.color = "white";
 
 
         
-            setTimeout(function() {
-                document.getElementById("form").style.backgroundColor = "#f6f6f6";
-                document.getElementById("headerTitle").style.color = "black";
-                document.getElementById("idlabel").style.color = "#808080";
-                document.getElementById("checkoutbutton").style.color = "#0066ff";
-                document.getElementById("signupbutton").style.color = "#0066ff";
-                document.getElementById("adminloginbutton").style.color = "#acacac";
+            // setTimeout(function() {
+            //     document.getElementById("form").style.backgroundColor = "#f6f6f6";
+            //     document.getElementById("headerTitle").style.color = "black";
+            //     document.getElementById("idlabel").style.color = "#808080";
+            //     document.getElementById("checkoutbutton").style.color = "#0066ff";
+            //     document.getElementById("signupbutton").style.color = "#0066ff";
+            //     document.getElementById("adminloginbutton").style.color = "#acacac";
 
-            }, 1000);
+            // }, 1000);
 
 
 
@@ -146,19 +149,19 @@ export default function QRScannerCheckin({ setToken }) {
                     <a href={"/"} className='adminbutton' id="adminloginbutton">Admin Login</a>
 
 
-                    <div id="scannerdiv" style={{display: 'none'}}>
+                    {/* <div id="scannerdiv">
                     <QrScanner id="scanner" 
                         onDecode={(result) => onNewScanResult(result)}
                         onError={(error) => console.log(error?.message)}
                         scanDelay={2000}
                         constraints={{facingMode: 'user'}}
                     />
-                    </div>
+                    </div> */}
 
 
                 </div>
             </form>
-            {/* <div >
+            <div >
             <QRCodeScanner 
                 fps={10}
                 qrbox={250}
@@ -166,7 +169,7 @@ export default function QRScannerCheckin({ setToken }) {
                 qrCodeSuccessCallback={onNewScanResult}
                 
                 />
-            </div> */}
+            </div>
 
             <Toast toastlist={toastList} position="top-right" setList={setToastList} />
 

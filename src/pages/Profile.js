@@ -120,12 +120,14 @@ export default function Profile() {
         </form>
 
       </div>
-      <div style={{ height: "auto", margin: "0 auto", maxWidth: 256, width: "100%" }}>
+      <div style={{ background: 'white', padding: '16px'}}>
       {userData.login && (
           <QRCode
-            value={getToken()}
             size={256}
-            
+            style={{ height: "auto", maxWidth: "256px", width: "100%" }}
+            level={"L"}
+            value={getToken()}
+
           />
         )}
     </div>

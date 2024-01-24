@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import AttendeeTable from '../components/AttendeeTable';
-import { closeMeeting, getAttendees, getMeeting, getMeetingTypes, changeMeetingType } from '../API';
+import {closeMeeting, getAttendees, getMeeting, getMeetingTypes, changeMeetingType, deleteMeeting} from '../API';
 import { getToken } from '../App';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+
+
 
 function KioskLauncher(props) {
 
@@ -38,17 +43,68 @@ function CloseButton(props) {
     return (
       <div>
         <button className="dangerbutton" onClick={() => {
-          closeMeeting({
-            meetingId: props.data.id,
-            token: getToken()
-          });
-          navigate(`/meetings`);
+          confirmAlert({
+            title: 'Are you sure?',
+            message: 'Are you sure you want to close this meeting? This action will automatically check out all attendees and cannot be undone.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        closeMeeting({
+                            meetingId: props.data.id,
+                            token: getToken()
+                        });
+                        navigate(`/meetings`);
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {
+                    }
+                }
+            ]
+            });
         }}>Close Meeting</button>
-        <p>Clicking on the "Close Meeting" button will end the meeting and automatically check-out all attendees. Make sure that all attending members have checked-in as this operation cannot be undone! </p>
       </div>
     );
   }
   return <></>;
+}
+
+function DeleteButton(props) {
+
+  const navigate = useNavigate();
+  if (props.data.closetime === "") {
+    return <></>;
+  }
+  return (
+      <div>
+        <button className="dangerbutton" onClick={() => {
+          confirmAlert({
+            title: 'Are you sure?',
+            message: 'Are you sure you want to delete this meeting? This action cannot be undone.',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                  deleteMeeting({
+                    meetingId: props.data.id,
+                    token: getToken()
+                  });
+                  navigate(`/meetings`);
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => {
+                }
+              }
+            ]
+          });
+        }}>Delete Meeting
+        </button>
+      </div>
+  );
 }
 
 export default function MeetingDetails() {
@@ -160,8 +216,13 @@ export default function MeetingDetails() {
               ))}
             </select>
           </div>
-        
-        </div>
+          <div className="form-group">
+
+            <br />
+
+            <DeleteButton data={meetingData} />
+          </div>
+            </div>
 
         <div className="panel">
           <AttendeeTable data={attendeeData} />

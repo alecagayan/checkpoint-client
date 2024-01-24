@@ -134,7 +134,6 @@ export default function UserDetails() {
             </div>
           </div>
           <div className="form-group">
-            <br />
             <button className='normalbutton'>Update User</button>
 
             <button className="normalbutton" type='button' onClick={() => {handleForgotPassword();}}>Reset Password</button>
